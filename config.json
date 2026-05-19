@@ -1,0 +1,57 @@
+{
+  "ComponentTags": {
+    "labels": []
+  },
+  "DecalPallet": [],
+  "GameComplexity": "",
+  "GameMode": "Frenopolis",
+  "GameType": "",
+  "Gravity": 0.5,
+  "Grid_path": "Grid.json",
+  "Hands": {
+    "DisableUnused": false,
+    "Enable": true,
+    "Hiding": 0
+  },
+  "Lighting_path": "Lighting.json",
+  "LuaScript": "require(\"Global\")",
+  "LuaScriptState": "",
+  "Note": "",
+  "ObjectStates_order": [
+    "HandTrigger.6fc458",
+    "HandTrigger.3d5efb",
+    "HandTrigger.62e08e",
+    "HandTrigger.0b6a64",
+    "Custom_Assetbundle.afc863",
+    "Custom_Assetbundle.c8edca",
+    "Custom_Assetbundle.393bf7",
+    "Custom_Assetbundle.12c65e",
+    "FlexTableControl.bd69bd",
+    "Custom_Assetbundle.f938a2",
+    "Custom_Assetbundle.9f95fd",
+    "Custom_Assetbundle.35b95f",
+    "Custom_Assetbundle.5af8f2",
+    "Custom_Model.4ee1f2"
+  ],
+  "PlayArea": 0.5,
+  "SaveName": "Frenopolis",
+  "Sky": "Sky_Museum",
+  "TabStates": {
+    "0": {
+      "body": "",
+      "color": "Grey",
+      "id": 0,
+      "title": "Rules",
+      "visibleColor": {
+        "b": 0.5,
+        "g": 0.5,
+        "r": 0.5
+      }
+    }
+  },
+  "Table": "Table_None",
+  "Tags": [],
+  "Turns_path": "Turns.json",
+  "VersionNumber": "v14.2.1",
+  "XmlUI": "\u003cInclude src=\"Global.xml\"/\u003e"
+}
