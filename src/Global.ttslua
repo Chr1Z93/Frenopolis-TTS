@@ -1,3 +1,7 @@
+require("TtsLuaAdditions")
+local MathLib   = require("MathLib")
+local SearchLib = require("SearchLib")
+
 function onLoad()
   broadcastToAll("Welcome to Frenopolis!")
 end
