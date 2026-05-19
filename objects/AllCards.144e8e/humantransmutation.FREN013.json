@@ -1,0 +1,24 @@
+{
+  "Name": "Card",
+  "Transform": {
+    "rotY": 270,
+    "scaleX": 1,
+    "scaleY": 1,
+    "scaleZ": 1
+  },
+  "Nickname": "human transmutation",
+  "GUID": "FREN013",
+  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"7\", \"colorCost\": \"1\", \"colorlessCost\": \"2\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "CardID": "1400",
+  "CustomDeck": {
+    "14": {
+      "FaceURL": "orange deck\\human transmutation.png",
+      "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
+      "NumWidth": 1,
+      "NumHeight": 1,
+      "BackIsHidden": true,
+      "UniqueBack": false,
+      "Type": 0
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "Name": "Card",
+  "Transform": {
+    "rotY": 270,
+    "scaleX": 1,
+    "scaleY": 1,
+    "scaleZ": 1
+  },
+  "Nickname": "mumu",
+  "GUID": "FREN077",
+  "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"4\", \"colorCost\": \"1\", \"colorlessCost\": \"0\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "CardID": "7800",
+  "CustomDeck": {
+    "78": {
+      "FaceURL": "red deck\\mumu.png",
+      "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
+      "NumWidth": 1,
+      "NumHeight": 1,
+      "BackIsHidden": true,
+      "UniqueBack": false,
+      "Type": 0
+    }
+  }
+}

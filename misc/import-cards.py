@@ -1,21 +1,29 @@
 import csv
 import json
+import shutil
 from pathlib import Path
+
+SCRIPT_DIR = Path(__file__).resolve().parent
 
 # Config
 OUTPUT = Path(r"C:\git\Frenopolis-TTS\objects\AllCards.144e8e")
-DATA_CSV = "frenopolis-card-data.csv"
+DATA_CSV = SCRIPT_DIR / "frenopolis-card-data.csv"
 
 
 class TTSCardGenerator:
     def __init__(self, output_folder):
         self.output_folder = output_folder
+
+        if self.output_folder.exists():
+            print(f"Deleting existing folder: {self.output_folder}")
+            shutil.rmtree(self.output_folder)
+
         self.output_folder.mkdir(parents=True, exist_ok=True)
 
     def build_individual_cards(self, csv_path):
         print(f"Reading data from {csv_path}...")
 
-        with open(csv_path, mode="r", encoding="utf-8-sig") as f:
+        with open(csv_path, mode="r", encoding="utf-8") as f:
             # Assumes the CSV has a header row
             reader = csv.DictReader(f)
 
@@ -49,7 +57,7 @@ class TTSCardGenerator:
 
                 # Determine file name
                 owner = f"{row.get("DECK",'').lower()} deck"
-                img_file = f"{owner}\\{card_name}"
+                img_file = f"{owner}\\{card_name}.png"
 
                 # Custom Deck / URL handling
                 deck_id = str(i + 1)
@@ -72,7 +80,7 @@ class TTSCardGenerator:
                 out_path = self.output_folder / out_name
 
                 with open(out_path, "w", encoding="utf-8") as out_f:
-                    json.dump(card, out_f, indent=4, ensure_ascii=False)
+                    json.dump(card, out_f, indent=2, ensure_ascii=False)
 
                 print(f"Created: {out_name}")
 

@@ -1,0 +1,24 @@
+{
+  "Name": "Card",
+  "Transform": {
+    "rotY": 270,
+    "scaleX": 1,
+    "scaleY": 1,
+    "scaleZ": 1
+  },
+  "Nickname": "multi dimensional realizer",
+  "GUID": "FREN028",
+  "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"3\", \"colorCost\": \"1\", \"colorlessCost\": \"0\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "CardID": "2900",
+  "CustomDeck": {
+    "29": {
+      "FaceURL": "orange deck\\multi dimensional realizer.png",
+      "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
+      "NumWidth": 1,
+      "NumHeight": 1,
+      "BackIsHidden": true,
+      "UniqueBack": false,
+      "Type": 0
+    }
+  }
+}

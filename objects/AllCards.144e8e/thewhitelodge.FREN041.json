@@ -1,0 +1,24 @@
+{
+  "Name": "Card",
+  "Transform": {
+    "rotY": 270,
+    "scaleX": 1,
+    "scaleY": 1,
+    "scaleZ": 1
+  },
+  "Nickname": "the white lodge",
+  "GUID": "FREN041",
+  "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"7\", \"colorCost\": \"5\", \"colorlessCost\": \"0\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "CardID": "4200",
+  "CustomDeck": {
+    "42": {
+      "FaceURL": "orange deck\\the white lodge.png",
+      "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
+      "NumWidth": 1,
+      "NumHeight": 1,
+      "BackIsHidden": true,
+      "UniqueBack": false,
+      "Type": 0
+    }
+  }
+}

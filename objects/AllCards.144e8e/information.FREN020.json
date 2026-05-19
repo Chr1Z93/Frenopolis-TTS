@@ -1,0 +1,24 @@
+{
+  "Name": "Card",
+  "Transform": {
+    "rotY": 270,
+    "scaleX": 1,
+    "scaleY": 1,
+    "scaleZ": 1
+  },
+  "Nickname": "information",
+  "GUID": "FREN020",
+  "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"5\", \"colorCost\": \"2\", \"colorlessCost\": \"0\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "CardID": "2100",
+  "CustomDeck": {
+    "21": {
+      "FaceURL": "orange deck\\information.png",
+      "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
+      "NumWidth": 1,
+      "NumHeight": 1,
+      "BackIsHidden": true,
+      "UniqueBack": false,
+      "Type": 0
+    }
+  }
+}
