@@ -1,0 +1,3 @@
+function onLoad()
+  broadcastToAll("Welcome to Frenopolis!")
+end

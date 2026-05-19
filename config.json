@@ -1,6 +1,11 @@
 {
   "ComponentTags": {
-    "labels": []
+    "labels": [
+      {
+        "displayed": "NotInteractable",
+        "normalized": "notinteractable"
+      }
+    ]
   },
   "DecalPallet": [],
   "GameComplexity": "",
@@ -31,7 +36,10 @@
     "Custom_Assetbundle.9f95fd",
     "Custom_Assetbundle.35b95f",
     "Custom_Assetbundle.5af8f2",
-    "Custom_Model.4ee1f2"
+    "Custom_Model.4ee1f2",
+    "PlayArea.e7672a",
+    "QuickStart.cbf79a",
+    "Explanation.6a20c7"
   ],
   "PlayArea": 0.5,
   "SaveName": "Frenopolis",

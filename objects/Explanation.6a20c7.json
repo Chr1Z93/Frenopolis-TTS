@@ -6,21 +6,26 @@
   },
   "Autoraise": true,
   "ColorDiffuse": {
-    "b": 1,
-    "g": 1,
-    "r": 1
+    "b": 0,
+    "g": 0,
+    "r": 0
   },
-  "CustomAssetbundle": {
-    "AssetbundleSecondaryURL": "",
-    "AssetbundleURL": "https://steamusercontent-a.akamaihd.net/ugc/879750610978795929/723C50F43FAB3DE3DC12CB8460536E8CB34B60A3/",
-    "LoopingEffectIndex": 0,
-    "MaterialIndex": 2,
-    "TypeIndex": 4
+  "CustomImage": {
+    "CustomTile": {
+      "Stackable": false,
+      "Stretch": true,
+      "Thickness": 0.1,
+      "Type": 0
+    },
+    "ImageScalar": 1,
+    "ImageSecondaryURL": "",
+    "ImageURL": "https://steamusercontent-a.akamaihd.net/ugc/10712824087888818621/CF39A5E1C61F684D8728D9E4C278326BBE1B9E2E/",
+    "WidthScale": 0
   },
   "Description": "",
   "DragSelectable": true,
   "GMNotes": "",
-  "GUID": "c8edca",
+  "GUID": "6a20c7",
   "Grid": true,
   "GridProjection": false,
   "Hands": false,
@@ -31,21 +36,24 @@
   "LuaScript": "",
   "LuaScriptState": "",
   "MeasureMovement": false,
-  "Name": "Custom_Assetbundle",
-  "Nickname": "",
+  "Name": "Custom_Tile",
+  "Nickname": "Explanation",
   "Snap": true,
   "Sticky": true,
+  "Tags": [
+    "NotInteractable"
+  ],
   "Tooltip": true,
   "Transform": {
-    "posX": -9,
-    "posY": -9,
-    "posZ": 9,
+    "posX": -18.5,
+    "posY": 1.981,
+    "posZ": 0,
     "rotX": 0,
     "rotY": 90,
     "rotZ": 0,
-    "scaleX": 1,
+    "scaleX": 6.5,
     "scaleY": 1,
-    "scaleZ": 1
+    "scaleZ": 6.5
   },
   "Value": 0,
   "XmlUI": ""
