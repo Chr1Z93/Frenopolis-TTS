@@ -1,26 +1,16 @@
 import csv
 import json
-import os
-import copy
-from datetime import datetime
+from pathlib import Path
 
 # Config
-TEMPLATE = "TTSCardTemplate.json"
-OUTPUT = "./GeneratedCards"
+OUTPUT = Path(r"C:\git\Frenopolis-TTS\objects\AllCards.144e8e")
 DATA_CSV = "frenopolis-card-data.csv"
 
 
 class TTSCardGenerator:
-    def __init__(self, template_path, output_folder):
-        self.template_path = template_path
+    def __init__(self, output_folder):
         self.output_folder = output_folder
-
-        # Ensure output folder exists
-        os.makedirs(self.output_folder, exist_ok=True)
-
-        # Load the base card template
-        with open(self.template_path, "r", encoding="utf-8") as f:
-            self.card_template = json.load(f)
+        self.output_folder.mkdir(parents=True, exist_ok=True)
 
     def build_individual_cards(self, csv_path):
         print(f"Reading data from {csv_path}...")
@@ -42,12 +32,25 @@ class TTSCardGenerator:
                 card["Transform"] = {"rotY": 270, "scaleX": 1, "scaleY": 1, "scaleZ": 1}
                 card["Nickname"] = card_name
                 card["GUID"] = f"FREN{i:03}"
-                card["GMNotes"] = json.dumps(row, ensure_ascii=False)
+
+                # Add metadata
+                card["GMNotes"] = json.dumps(
+                    {
+                        "type": row.get("TYPE", ""),
+                        "subType": row.get("SUB TYPE", ""),
+                        "stat": row.get("STAT", ""),
+                        "colorCost": row.get("COLOR COST", ""),
+                        "colorlessCost": row.get("COLORLESS COST", ""),
+                        "color": row.get("COLOR", ""),
+                        "deck": row.get("DECK", ""),
+                    },
+                    ensure_ascii=False,
+                )
 
                 # Determine file name
-                owner = f"{row.get("DECK","").lower()} deck"
+                owner = f"{row.get("DECK",'').lower()} deck"
                 img_file = f"{owner}\\{card_name}"
-        
+
                 # Custom Deck / URL handling
                 deck_id = str(i + 1)
                 card["CardID"] = f"{deck_id}00"
@@ -66,7 +69,7 @@ class TTSCardGenerator:
                 # Save as an individual JSON file
                 safe_filename = "".join(c for c in card_name if c.isalnum()).rstrip()
                 out_name = f"{safe_filename}.FREN{i:03}.json"
-                out_path = os.path.join(self.output_folder, out_name)
+                out_path = self.output_folder / out_name
 
                 with open(out_path, "w", encoding="utf-8") as out_f:
                     json.dump(card, out_f, indent=4, ensure_ascii=False)
@@ -75,5 +78,5 @@ class TTSCardGenerator:
 
 
 if __name__ == "__main__":
-    generator = TTSCardGenerator(TEMPLATE, OUTPUT)
+    generator = TTSCardGenerator(OUTPUT)
     generator.build_individual_cards(DATA_CSV)
