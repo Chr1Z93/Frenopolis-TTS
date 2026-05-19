@@ -75,14 +75,18 @@ function moveToZone(card, owner, zoneName)
   local localTarget
 
   if ZONES[owner] and ZONES[owner][zoneName] then
-    localTarget = ZONES[owner][zoneName]
+    localTarget    = ZONES[owner][zoneName]
     targetRotation = (owner == "White") and 180 or 0
   elseif ZONES["Shared"] and ZONES["Shared"][zoneName] then
-    localTarget = ZONES["Shared"][zoneName]
+    localTarget    = ZONES["Shared"][zoneName]
     targetRotation = (zoneName == "Void") and 90 or 270
   else
     printToAll("Zone " .. zoneName .. " not found!", "Red")
     return
+  end
+
+  if zoneName == "Archive" then
+    targetRotation = targetRotation + 90
   end
 
   local PlayArea = getObjectByName("Play Area")
@@ -92,7 +96,7 @@ function moveToZone(card, owner, zoneName)
   end
 
   local globalTarget = PlayArea.positionToWorld(localTarget)
-  DeckLib.placeOrMergeIntoDeck(card, globalTarget, targetRotation)
+  DeckLib.placeOrMergeIntoDeck(card, globalTarget, Vector(0, targetRotation, 0))
 end
 
 function getObjectByName(name)
@@ -115,10 +119,10 @@ function spawnDecks(playerColor, _, bag)
 
   -- spawn decks
   local deckRot = Vector(0, 180, 180)
-  local deckPos = bag.getPosition()
+  local deckPos = bag.getPosition() + Vector(0, 0.5, 0)
   for owner, cardList in pairs(cardsByDeck) do
     TableLib.shuffle(cardList)
-    deckPos              = deckPos + Vector(0, 0.5, 3.5)
+    deckPos              = deckPos + Vector(0, 0, 3.5)
     local deckData       = DeckLib.generateDeckDataFromCardList(cardList, deckPos, deckRot)
     deckData["Nickname"] = toSimpleTitleCase(owner .. " Deck")
     spawnObjectData({ data = deckData })
@@ -145,17 +149,17 @@ end
 
 ZONES = {
   White = {
-    Archive = Vector(0.773, 0.11, 0.597),
-    Avatar  = Vector(0.773, 0.11, 0.239),
-    Soul    = Vector(0.773, 0.11, 0.848),
+    Archive = Vector(-0.773, 0.11, 0.597),
+    Avatar  = Vector(-0.773, 0.11, 0.239),
+    Soul    = Vector(-0.773, 0.11, 0.848),
   },
   Blue = {
-    Archive = Vector(-0.773, 0.11, -0.597),
-    Avatar  = Vector(-0.773, 0.11, -0.239),
-    Soul    = Vector(-0.773, 0.11, -0.848),
+    Archive = Vector(0.773, 0.11, -0.597),
+    Avatar  = Vector(0.773, 0.11, -0.239),
+    Soul    = Vector(0.773, 0.11, -0.848),
   },
   Shared = {
-    Narrative = Vector(0.773, 0.11, -0.117),
-    Void      = Vector(-0.773, 0.11, 0.117),
+    Narrative = Vector(-0.773, 0.11, -0.117),
+    Void      = Vector(0.773, 0.11, 0.117),
   }
 }
