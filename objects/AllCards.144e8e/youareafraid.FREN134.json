@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "you are afraid",
-  "GUID": "FREN134",
+  "GUID": "fren134",
   "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"4\", \"colorCost\": \"3\", \"colorlessCost\": \"0\", \"color\": \"violet\", \"deck\": \"VIOLET\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "13500",
   "CustomDeck": {
     "135": {
-      "FaceURL": "violet deck\\you are afraid.png",
+      "FaceURL": "frenopolis tts\\violet deck\\you are afraid.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

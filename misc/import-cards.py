@@ -37,9 +37,9 @@ class TTSCardGenerator:
                 # Create Card
                 card = {}
                 card["Name"] = "Card"
-                card["Transform"] = {"rotY": 270, "scaleX": 1, "scaleY": 1, "scaleZ": 1}
+                card["Transform"] = {"rotY": 180, "scaleX": 1, "scaleY": 1, "scaleZ": 1}
                 card["Nickname"] = card_name
-                card["GUID"] = f"FREN{i:03}"
+                card["GUID"] = f"fren{i:03}"
 
                 # Add metadata
                 card["GMNotes"] = json.dumps(
@@ -54,10 +54,11 @@ class TTSCardGenerator:
                     },
                     ensure_ascii=False,
                 )
+                card["Tags"] = ["PlayerCard"]
 
                 # Determine file name
                 owner = f"{row.get("DECK",'').lower()} deck"
-                img_file = f"{owner}\\{card_name}.png"
+                img_file = f"frenopolis tts\\{owner}\\{card_name}.png"
 
                 # Custom Deck / URL handling
                 deck_id = str(i + 1)
@@ -76,7 +77,7 @@ class TTSCardGenerator:
 
                 # Save as an individual JSON file
                 safe_filename = "".join(c for c in card_name if c.isalnum()).rstrip()
-                out_name = f"{safe_filename}.FREN{i:03}.json"
+                out_name = f"{safe_filename}.fren{i:03}.json"
                 out_path = self.output_folder / out_name
 
                 with open(out_path, "w", encoding="utf-8") as out_f:

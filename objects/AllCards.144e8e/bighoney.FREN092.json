@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "big honey",
-  "GUID": "FREN092",
+  "GUID": "fren092",
   "GMNotes": "{\"type\": \"fren\", \"subType\": \"structure\", \"stat\": \"2\", \"colorCost\": \"\", \"colorlessCost\": \"\", \"color\": \"green\", \"deck\": \"VIOLET\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "9300",
   "CustomDeck": {
     "93": {
-      "FaceURL": "violet deck\\big honey.png",
+      "FaceURL": "frenopolis tts\\violet deck\\big honey.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

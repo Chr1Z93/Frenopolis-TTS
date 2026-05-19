@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "pot of sneed",
-  "GUID": "FREN082",
+  "GUID": "fren082",
   "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"2\", \"colorCost\": \"2\", \"colorlessCost\": \"0\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "8300",
   "CustomDeck": {
     "83": {
-      "FaceURL": "red deck\\pot of sneed.png",
+      "FaceURL": "frenopolis tts\\red deck\\pot of sneed.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

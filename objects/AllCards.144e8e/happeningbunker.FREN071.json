@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "happening bunker",
-  "GUID": "FREN071",
+  "GUID": "fren071",
   "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"4\", \"colorCost\": \"4\", \"colorlessCost\": \"0\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "7200",
   "CustomDeck": {
     "72": {
-      "FaceURL": "red deck\\happening bunker.png",
+      "FaceURL": "frenopolis tts\\red deck\\happening bunker.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "the purge",
-  "GUID": "FREN128",
+  "GUID": "fren128",
   "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"7\", \"colorCost\": \"4\", \"colorlessCost\": \"0\", \"color\": \"violet\", \"deck\": \"VIOLET\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "12900",
   "CustomDeck": {
     "129": {
-      "FaceURL": "violet deck\\the purge.png",
+      "FaceURL": "frenopolis tts\\violet deck\\the purge.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

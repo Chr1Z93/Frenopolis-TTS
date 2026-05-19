@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "riddle of the roccs",
-  "GUID": "FREN035",
+  "GUID": "fren035",
   "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"2\", \"colorCost\": \"2\", \"colorlessCost\": \"0\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "3600",
   "CustomDeck": {
     "36": {
-      "FaceURL": "orange deck\\riddle of the roccs.png",
+      "FaceURL": "frenopolis tts\\orange deck\\riddle of the roccs.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "dan halen sheetrock",
-  "GUID": "FREN062",
+  "GUID": "fren062",
   "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"6\", \"colorCost\": \"4\", \"colorlessCost\": \"1\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "6300",
   "CustomDeck": {
     "63": {
-      "FaceURL": "red deck\\dan halen sheetrock.png",
+      "FaceURL": "frenopolis tts\\red deck\\dan halen sheetrock.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "governbot",
-  "GUID": "FREN106",
+  "GUID": "fren106",
   "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"6\", \"colorCost\": \"2\", \"colorlessCost\": \"1\", \"color\": \"violet\", \"deck\": \"VIOLET\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "10700",
   "CustomDeck": {
     "107": {
-      "FaceURL": "violet deck\\governbot.png",
+      "FaceURL": "frenopolis tts\\violet deck\\governbot.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

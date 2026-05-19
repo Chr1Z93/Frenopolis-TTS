@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "frennical x",
-  "GUID": "FREN008",
+  "GUID": "fren008",
   "GMNotes": "{\"type\": \"fren\", \"subType\": \"structure\", \"stat\": \"2\", \"colorCost\": \"\", \"colorlessCost\": \"\", \"color\": \"green\", \"deck\": \"ORANGE\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "900",
   "CustomDeck": {
     "9": {
-      "FaceURL": "orange deck\\frennical x.png",
+      "FaceURL": "frenopolis tts\\orange deck\\frennical x.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

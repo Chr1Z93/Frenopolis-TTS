@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "tyrone",
-  "GUID": "FREN088",
+  "GUID": "fren088",
   "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"6\", \"colorCost\": \"4\", \"colorlessCost\": \"1\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "8900",
   "CustomDeck": {
     "89": {
-      "FaceURL": "red deck\\tyrone.png",
+      "FaceURL": "frenopolis tts\\red deck\\tyrone.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

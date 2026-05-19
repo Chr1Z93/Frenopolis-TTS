@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "hypnotoad",
-  "GUID": "FREN014",
+  "GUID": "fren014",
   "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"1\", \"colorCost\": \"1\", \"colorlessCost\": \"0\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "1500",
   "CustomDeck": {
     "15": {
-      "FaceURL": "orange deck\\hypnotoad.png",
+      "FaceURL": "frenopolis tts\\orange deck\\hypnotoad.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

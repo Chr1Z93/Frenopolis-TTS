@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "wojak index",
-  "GUID": "FREN132",
+  "GUID": "fren132",
   "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"4\", \"colorCost\": \"1\", \"colorlessCost\": \"0\", \"color\": \"black\", \"deck\": \"VIOLET\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "13300",
   "CustomDeck": {
     "133": {
-      "FaceURL": "violet deck\\wojak index.png",
+      "FaceURL": "frenopolis tts\\violet deck\\wojak index.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

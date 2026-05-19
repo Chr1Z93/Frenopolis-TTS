@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "joshua graham",
-  "GUID": "FREN022",
+  "GUID": "fren022",
   "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"5\", \"colorCost\": \"1\", \"colorlessCost\": \"2\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "2300",
   "CustomDeck": {
     "23": {
-      "FaceURL": "orange deck\\joshua graham.png",
+      "FaceURL": "frenopolis tts\\orange deck\\joshua graham.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

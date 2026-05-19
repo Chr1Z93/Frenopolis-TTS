@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "5 day forcast",
-  "GUID": "FREN047",
+  "GUID": "fren047",
   "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"3\", \"colorCost\": \"3\", \"colorlessCost\": \"2\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "4800",
   "CustomDeck": {
     "48": {
-      "FaceURL": "red deck\\5 day forcast.png",
+      "FaceURL": "frenopolis tts\\red deck\\5 day forcast.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

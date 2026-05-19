@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "serafren",
-  "GUID": "FREN037",
+  "GUID": "fren037",
   "GMNotes": "{\"type\": \"fren\", \"subType\": \"structure\", \"stat\": \"2\", \"colorCost\": \"\", \"colorlessCost\": \"\", \"color\": \"green\", \"deck\": \"ORANGE\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "3800",
   "CustomDeck": {
     "38": {
-      "FaceURL": "orange deck\\serafren.png",
+      "FaceURL": "frenopolis tts\\orange deck\\serafren.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

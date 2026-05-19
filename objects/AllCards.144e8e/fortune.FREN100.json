@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "fortune",
-  "GUID": "FREN100",
+  "GUID": "fren100",
   "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"2\", \"colorCost\": \"2\", \"colorlessCost\": \"0\", \"color\": \"violet\", \"deck\": \"VIOLET\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "10100",
   "CustomDeck": {
     "101": {
-      "FaceURL": "violet deck\\fortune.png",
+      "FaceURL": "frenopolis tts\\violet deck\\fortune.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

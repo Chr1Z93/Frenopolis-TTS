@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "saul goodman",
-  "GUID": "FREN084",
+  "GUID": "fren084",
   "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"4\", \"colorCost\": \"3\", \"colorlessCost\": \"1\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "8500",
   "CustomDeck": {
     "85": {
-      "FaceURL": "red deck\\saul goodman.png",
+      "FaceURL": "frenopolis tts\\red deck\\saul goodman.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

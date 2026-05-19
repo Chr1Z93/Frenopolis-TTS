@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "dr pepe",
-  "GUID": "FREN099",
+  "GUID": "fren099",
   "GMNotes": "{\"type\": \"fren\", \"subType\": \"entity\", \"stat\": \"2\", \"colorCost\": \"\", \"colorlessCost\": \"\", \"color\": \"green\", \"deck\": \"VIOLET\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "10000",
   "CustomDeck": {
     "100": {
-      "FaceURL": "violet deck\\dr pepe.png",
+      "FaceURL": "frenopolis tts\\violet deck\\dr pepe.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

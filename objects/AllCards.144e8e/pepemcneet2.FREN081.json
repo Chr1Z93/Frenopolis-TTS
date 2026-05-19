@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "pepe mcneet2",
-  "GUID": "FREN081",
+  "GUID": "fren081",
   "GMNotes": "{\"type\": \"fren\", \"subType\": \"structure\", \"stat\": \"2\", \"colorCost\": \"0\", \"colorlessCost\": \"0\", \"color\": \"green\", \"deck\": \"RED\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "8200",
   "CustomDeck": {
     "82": {
-      "FaceURL": "red deck\\pepe mcneet2.png",
+      "FaceURL": "frenopolis tts\\red deck\\pepe mcneet2.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

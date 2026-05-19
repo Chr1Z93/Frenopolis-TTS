@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "frenwatch",
-  "GUID": "FREN101",
+  "GUID": "fren101",
   "GMNotes": "{\"type\": \"fren\", \"subType\": \"meme\", \"stat\": \"2\", \"colorCost\": \"\", \"colorlessCost\": \"\", \"color\": \"green\", \"deck\": \"VIOLET\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "10200",
   "CustomDeck": {
     "102": {
-      "FaceURL": "violet deck\\frenwatch.png",
+      "FaceURL": "frenopolis tts\\violet deck\\frenwatch.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,

@@ -1,18 +1,21 @@
 {
   "Name": "Card",
   "Transform": {
-    "rotY": 270,
+    "rotY": 180,
     "scaleX": 1,
     "scaleY": 1,
     "scaleZ": 1
   },
   "Nickname": "chudly",
-  "GUID": "FREN058",
+  "GUID": "fren058",
   "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"7\", \"colorCost\": \"5\", \"colorlessCost\": \"0\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "Tags": [
+    "PlayerCard"
+  ],
   "CardID": "5900",
   "CustomDeck": {
     "59": {
-      "FaceURL": "red deck\\chudly.png",
+      "FaceURL": "frenopolis tts\\red deck\\chudly.png",
       "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
       "NumWidth": 1,
       "NumHeight": 1,
