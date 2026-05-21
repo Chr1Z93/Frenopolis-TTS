@@ -11,7 +11,7 @@ local TableLib               = require("TableLib")
 --------------------------------------------------
 
 local PHASE_TRACKER_HEIGHT   = 200
-local PHASE_TRACKER_WIDTH    = 700
+local PHASE_TRACKER_WIDTH    = 800
 local PHASE_TRACKER_FONTSIZE = 100
 local PHASE_TRACKER_SPACING  = 25
 
@@ -114,6 +114,16 @@ function createGlobalXml()
           text       = "Spawn Decks",
           visibility = "Admin"
         }
+      },
+      {
+        tag        = "Button",
+        attributes = {
+          onClick    = "xml_untapAll",
+          color      = "Black",
+          textColor  = "White",
+          text       = "Untap All Cards",
+          visibility = "Admin"
+        }
       }
     }
   }
@@ -160,6 +170,33 @@ function xml_spawnDecks()
   spawnDecks(nil, nil, bag)
 end
 
+function addObjectsToMap(map, searchPos)
+  local searchResult = SearchLib.atPosition(searchPos, "isCard")
+  for _, card in ipairs(searchResult) do
+    map[card] = true
+  end
+end
+
+function xml_untapAll()
+  local excludedCards = {}
+
+  for _, zoneName in ipairs({ "Narrative", "Void" }) do
+    addObjectsToMap(excludedCards, ZONES["Shared"][zoneName])
+  end
+
+  for _, zoneName in ipairs({ "Archive", "Soul" }) do
+    for _, playerColor in ipairs({ "Yellow", "Blue" }) do
+      addObjectsToMap(excludedCards, ZONES[playerColor][zoneName])
+    end
+  end
+
+  for _, obj in ipairs(getObjects()) do
+    if obj.hasTag("PlayerCard") and not obj.is_face_down and not excludedCards[obj] then
+      obj.setRotationSmooth(obj.getRotation():setAt("y", (obj.getPosition().z > 0) and 0 or 180))
+    end
+  end
+end
+
 --------------------------------------------------
 -- MARK: Context Menu
 --------------------------------------------------
@@ -175,11 +212,14 @@ function contextPlay(playerColor, _, card)
 end
 
 function contextPlayAsEnergy(playerColor, _, card)
-
+  -- place in "Energies" zone, faceup and with offset to existing ones (add snaps)
+  -- TODO
 end
 
 function contextFren(playerColor, _, card)
+  -- non-fren card: same as play, but only on top of another card with the same type-attribute
 
+  -- fren card: select cards to be grouped under this card, combine into stack
 end
 
 function contextArchive(playerColor, _, card)
