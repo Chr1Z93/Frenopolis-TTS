@@ -81,6 +81,10 @@ function createGlobalXml()
     children = {
       {
         tag        = "Button",
+        attributes = { raycastTarget = false, color = "Green", text = "Phase Tracker" },
+      },
+      {
+        tag        = "Button",
         attributes = { id = "PT_phase1", text = "Upkeep", raycastTarget = false, color = getPhaseColor(1) }
       },
       {
@@ -99,19 +103,27 @@ function createGlobalXml()
         tag        = "Button",
         attributes = { id = "PT_phase5", text = "End", raycastTarget = false, color = getPhaseColor(5) }
       },
-      { tag = "Panel" },
       {
         tag        = "Button",
-        attributes = { onClick = "xml_nextPhase", text = "Next Phase" },
+        attributes = { onClick = "xml_nextPhase", color = "Orange", text = "→ Next Phase" },
       },
       { tag = "Panel" },
       {
         tag        = "Button",
         attributes = {
+          raycastTarget = false,
+          color         = "Black",
+          textColor     = "White",
+          text          = "Admin Controls",
+          visibility    = "Admin"
+        },
+      },
+      {
+        tag        = "Button",
+        attributes = {
           onClick    = "xml_spawnDecks",
-          color      = "Black",
-          textColor  = "White",
-          text       = "Spawn Decks",
+          color      = "Orange",
+          text       = "→ Spawn Decks",
           visibility = "Admin"
         }
       },
@@ -119,9 +131,17 @@ function createGlobalXml()
         tag        = "Button",
         attributes = {
           onClick    = "xml_untapAll",
-          color      = "Black",
-          textColor  = "White",
-          text       = "Untap All Cards",
+          color      = "Orange",
+          text       = "→ Untap All Cards",
+          visibility = "Admin"
+        }
+      },
+      {
+        tag        = "Button",
+        attributes = {
+          onClick    = "xml_nextPlayer",
+          color      = "Orange",
+          text       = "→ Next Player",
           visibility = "Admin"
         }
       }
@@ -143,7 +163,12 @@ function createGlobalXml()
   UI.setXmlTable(xml)
 end
 
-function xml_nextPhase()
+function xml_nextPhase(player)
+  if player.color ~= activePlayer then
+    broadcastToColor("It's not your turn!", player.color)
+    return
+  end
+
   activePhase = activePhase + 1
 
   if activePhase > 5 then
@@ -177,6 +202,20 @@ function addObjectsToMap(map, searchPos)
   end
 end
 
+function xml_nextPlayer()
+  activePhase = 1
+
+  if activePlayer == "Yellow" then
+    activePlayer = "Blue"
+  else
+    activePlayer = "Yellow"
+  end
+
+  broadcastToAll("It's " .. getColoredName(activePlayer) .. "'s turn!")
+
+  highlightPhase()
+end
+
 function xml_untapAll()
   local excludedCards = {}
 
@@ -208,15 +247,55 @@ function addContextMenu(card)
 end
 
 function contextPlay(playerColor, _, card)
+  if playerColor ~= activePlayer then
+    broadcastToColor("It's not your turn!", playerColor)
+    return
+  end
+
+  -- highlight valid spots
+
+  -- wait for player selection
+  selectedPosition = Vector(0, 0, 0)
+
+  -- if card is in hand: highlight cards to pay mana
+  if isInHand(card) then
+    startManaSelection(card)
+  else
+    DeckLib.placeOrMergeIntoDeck(card, selectedPosition)
+  end
+end
+
+function xml_abortManaSelection(player)
 
 end
 
+function startManaSelection(card)
+
+end
+
+function isInHand(object)
+  for _, zone in ipairs(object.getZones()) do
+    if zone.type == "Hand" then return true end
+  end
+  return false
+end
+
 function contextPlayAsEnergy(playerColor, _, card)
+  if playerColor ~= activePlayer then
+    broadcastToColor("It's not your turn!", playerColor)
+    return
+  end
+
   -- place in "Energies" zone, faceup and with offset to existing ones (add snaps)
   -- TODO
 end
 
 function contextFren(playerColor, _, card)
+  if playerColor ~= activePlayer then
+    broadcastToColor("It's not your turn!", playerColor)
+    return
+  end
+
   -- non-fren card: same as play, but only on top of another card with the same type-attribute
 
   -- fren card: select cards to be grouped under this card, combine into stack
