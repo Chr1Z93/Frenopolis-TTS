@@ -1,21 +1,41 @@
 require("TtsLuaAdditions")
-local ColorLib     = require("ColorLib")
-local CoroutineLib = require("CoroutineLib")
-local DeckLib      = require("DeckLib")
-local MathLib      = require("MathLib")
-local SearchLib    = require("SearchLib")
-local TableLib     = require("TableLib")
+local ColorLib               = require("ColorLib")
+local CoroutineLib           = require("CoroutineLib")
+local DeckLib                = require("DeckLib")
+local MathLib                = require("MathLib")
+local SearchLib              = require("SearchLib")
+local TableLib               = require("TableLib")
 
 --------------------------------------------------
--- Initialization
+-- MARK: Initialization
 --------------------------------------------------
 
-function onLoad()
+local PHASE_TRACKER_HEIGHT   = 200
+local PHASE_TRACKER_WIDTH    = 900
+local PHASE_TRACKER_FONTSIZE = 100
+local PHASE_TRACKER_SPACING  = 25
+
+local activePlayer           = "Yellow"
+local activePhase            = 1
+
+function onSave()
+  return { activePlayer = activePlayer, activePhase = activePhase }
+end
+
+function onLoad(saveData)
   broadcastToAll("Welcome to Frenopolis!")
+
+  if saveData and saveData ~= "" then
+    local loadedData = JSON.decode(saveData)
+    activePlayer     = loadedData.activePlayer
+    activePhase      = loadedData.activePhase
+  end
 
   for _, obj in ipairs(getObjects()) do
     onObjectSpawn(obj)
   end
+
+  createGlobalXml()
 end
 
 function onObjectSpawn(obj)
@@ -33,7 +53,115 @@ function onObjectSpawn(obj)
 end
 
 --------------------------------------------------
--- Context Menu
+-- MARK: XML
+--------------------------------------------------
+
+function getPhaseColor(i)
+  if i == activePhase then
+    return activePlayer
+  end
+  return "White"
+end
+
+function createGlobalXml()
+  local xml = {}
+
+  local sideButtons = {
+    tag = "VerticalLayout",
+    attributes = {
+      id            = "PT_main",
+      scale         = "0.2 0.2 1",
+      width         = PHASE_TRACKER_WIDTH,
+      offsetXY      = "-10 -175",
+      outline       = "Black",
+      outlineSize   = 2,
+      spacing       = PHASE_TRACKER_SPACING,
+      rectAlignment = "MiddleRight"
+    },
+    children = {
+      {
+        tag        = "Button",
+        attributes = { id = "PT_phase1", text = "Upkeep", raycastTarget = false, color = getPhaseColor(1) }
+      },
+      {
+        tag        = "Button",
+        attributes = { id = "PT_phase2", text = "Main 1", raycastTarget = false, color = getPhaseColor(2) }
+      },
+      {
+        tag        = "Button",
+        attributes = { id = "PT_phase3", text = "Combat", raycastTarget = false, color = getPhaseColor(3) }
+      },
+      {
+        tag        = "Button",
+        attributes = { id = "PT_phase4", text = "Main 2", raycastTarget = false, color = getPhaseColor(4) }
+      },
+      {
+        tag        = "Button",
+        attributes = { id = "PT_phase5", text = "End", raycastTarget = false, color = getPhaseColor(5) }
+      },
+      { tag = "Panel" },
+      {
+        tag        = "Button",
+        attributes = { onClick = "xml_nextPhase", text = "Next Phase" },
+      },
+      { tag = "Panel" },
+      {
+        tag        = "Button",
+        attributes = {
+          onClick    = "xml_spawnDecks",
+          color      = "Black",
+          textColor  = "White",
+          text       = "Spawn Decks",
+          visibility = "Admin"
+        }
+      }
+    }
+  }
+
+  for _, data in ipairs(sideButtons.children) do
+    data.attributes               = data.attributes or {}
+    data.attributes.padding       = "50 0 0 0"
+    data.attributes.textAlignment = "MiddleLeft"
+    data.attributes.fontSize      = PHASE_TRACKER_FONTSIZE
+    data.attributes.font          = data.attributes.font or "font_opsilon/opsilon-regular"
+  end
+
+  local num = #sideButtons.children
+  sideButtons.attributes.height = PHASE_TRACKER_HEIGHT * num + PHASE_TRACKER_SPACING * (num - 1)
+  table.insert(xml, sideButtons)
+
+  UI.setXmlTable(xml)
+end
+
+function xml_nextPhase()
+  activePhase = activePhase + 1
+
+  if activePhase > 5 then
+    activePhase = 1
+    if activePlayer == "Yellow" then
+      activePlayer = "Blue"
+    else
+      activePlayer = "Yellow"
+    end
+    broadcastToAll("It's " .. getColoredName(activePlayer) .. "'s turn!")
+  end
+
+  highlightPhase()
+end
+
+function highlightPhase()
+  for i = 1, 5 do
+    UI.setAttribute("PT_phase" .. i, "color", (i == activePhase) and "Yellow" or "Blue")
+  end
+end
+
+function xml_spawnDecks()
+  local bag = getObjectByName("All Cards")
+  spawnDecks(nil, nil, bag)
+end
+
+--------------------------------------------------
+-- MARK: Context Menu
 --------------------------------------------------
 
 function addContextMenu(card)
@@ -67,7 +195,7 @@ function contextCollect(playerColor, _, card)
 end
 
 --------------------------------------------------
--- General Functions
+-- MARK: General Functions
 --------------------------------------------------
 
 function moveToZone(card, owner, zoneName)
@@ -143,8 +271,18 @@ function toSimpleTitleCase(str)
   return table.concat(words, " ")
 end
 
+function getColoredName(playerColor)
+  local displayName = playerColor
+  if playerColor ~= "Grey" and Player[playerColor].steam_name then
+    displayName = Player[playerColor].steam_name
+  end
+
+  -- add bb-code
+  return "[" .. Color.fromString(playerColor):toHex() .. "]" .. displayName .. "[-]"
+end
+
 --------------------------------------------------
--- Positions
+-- MARK: Positions
 --------------------------------------------------
 
 ZONES = {

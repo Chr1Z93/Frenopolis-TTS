@@ -28,6 +28,13 @@
       }
     ]
   },
+  "CustomUIAssets": [
+    {
+      "Name": "font_opsilon",
+      "Type": 1,
+      "URL": "https://steamusercontent-a.akamaihd.net/ugc/13519783186361169429/EA26611913AB1065CCB95721FFA7727DCB08A81A/"
+    }
+  ],
   "DecalPallet": [],
   "GameComplexity": "",
   "GameMode": "Frenopolis",
