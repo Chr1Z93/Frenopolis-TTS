@@ -11,7 +11,7 @@ local TableLib               = require("TableLib")
 --------------------------------------------------
 
 local PHASE_TRACKER_HEIGHT   = 200
-local PHASE_TRACKER_WIDTH    = 900
+local PHASE_TRACKER_WIDTH    = 700
 local PHASE_TRACKER_FONTSIZE = 100
 local PHASE_TRACKER_SPACING  = 25
 
@@ -72,7 +72,7 @@ function createGlobalXml()
       id            = "PT_main",
       scale         = "0.2 0.2 1",
       width         = PHASE_TRACKER_WIDTH,
-      offsetXY      = "-10 -175",
+      offsetXY      = "-10 -100",
       outline       = "Black",
       outlineSize   = 2,
       spacing       = PHASE_TRACKER_SPACING,
@@ -151,7 +151,7 @@ end
 
 function highlightPhase()
   for i = 1, 5 do
-    UI.setAttribute("PT_phase" .. i, "color", (i == activePhase) and "Yellow" or "Blue")
+    UI.setAttribute("PT_phase" .. i, "color", getPhaseColor(i))
   end
 end
 

@@ -7,13 +7,13 @@
   "Autoraise": true,
   "ColorDiffuse": {
     "a": 0,
-    "b": 1,
-    "g": 1,
-    "r": 1
+    "b": 0.172,
+    "g": 0.898,
+    "r": 0.905
   },
   "Description": "",
   "DragSelectable": true,
-  "FogColor": "White",
+  "FogColor": "Yellow",
   "GMNotes": "",
   "GUID": "6fc458",
   "Grid": false,
