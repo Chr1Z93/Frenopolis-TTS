@@ -20,14 +20,7 @@
       "Zoomed": false
     }
   ],
-  "ComponentTags": {
-    "labels": [
-      {
-        "displayed": "NotInteractable",
-        "normalized": "notinteractable"
-      }
-    ]
-  },
+  "ComponentTags_path": "ComponentTags.json",
   "CustomUIAssets": [
     {
       "Name": "font_opsilon",
@@ -48,7 +41,7 @@
   },
   "Lighting_path": "Lighting.json",
   "LuaScript": "require(\"Global\")",
-  "LuaScriptState": "",
+  "LuaScriptState": "{\"activePhase\":1,\"activePlayer\":\"Yellow\"}",
   "Note": "",
   "ObjectStates_order": [
     "HandTrigger.6fc458",

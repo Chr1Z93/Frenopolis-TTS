@@ -17,6 +17,7 @@ local PHASE_TRACKER_SPACING  = 25
 
 local activePlayer           = "Yellow"
 local activePhase            = 1
+local activeAction           = nil
 
 function onSave()
   return JSON.encode({ activePlayer = activePlayer, activePhase = activePhase })
@@ -216,7 +217,7 @@ function xml_nextPlayer()
   highlightPhase()
 end
 
-function xml_untapAll()
+function getExcludedCards()
   local excludedCards = {}
 
   for _, zoneName in ipairs({ "Narrative", "Void" }) do
@@ -228,6 +229,12 @@ function xml_untapAll()
       addObjectsToMap(excludedCards, ZONES[playerColor][zoneName])
     end
   end
+
+  return excludedCards
+end
+
+function xml_untapAll()
+  local excludedCards = getExcludedCards()
 
   for _, obj in ipairs(getObjects()) do
     if obj.hasTag("PlayerCard") and not obj.is_face_down and not excludedCards[obj] then
@@ -252,25 +259,102 @@ function contextPlay(playerColor, _, card)
     return
   end
 
+  if activeAction then
+    broadcastToColor("There's already an ongoing action!", playerColor)
+    return
+  end
+
+  local md     = getMetadata(card)
+  activeAction = {
+    type         = "Play",
+    card         = card,
+    md           = md,
+    selectedMana = {}
+  }
+
+  broadcastToColor("Playing of '" .. card.getName() .. "' initiated!", playerColor)
+
   -- highlight valid spots
+  local PlayArea           = getObjectByName("Play Area")
+  local snaps              = PlayArea.getSnapPoints()
+  local validPositionFound = false
 
-  -- wait for player selection
-  selectedPosition = Vector(0, 0, 0)
+  for i, snap in ipairs(snaps) do
+    local pos = PlayArea.positionToWorld(snap.position)
 
-  -- if card is in hand: highlight cards to pay mana
-  if isInHand(card) then
-    startManaSelection(card)
+    -- limit to active players zones
+    if pos.x < 5 and pos.x > -5 and ((activePlayer == "Yellow" and pos.z < 0) or (activePlayer == "Blue" and pos.z > 0)) then
+      local searchResult = SearchLib.atPosition(pos, "isCard")
+      if #searchResult == 0 then
+        validPositionFound = true
+
+        -- display button for selection
+        PlayArea.createButton({
+          click_function = "processPlayPositionSelection" .. i,
+          function_owner = self,
+          position       = snap.position:scale(Vector(-1, 1, 1)) + Vector(0, 0.1, 0),
+          width          = 400,
+          height         = 400,
+          scale          = Vector(0.1, 0.1, 0.1),
+          color          = { 0, 1, 0, 0.8 },
+          tooltip        = "Play card here"
+        })
+
+        _G["processPlayPositionSelection" .. i] = function(obj, clickerColor)
+          if clickerColor ~= activePlayer or not activeAction then return end
+          activeAction.targetPosition = pos
+          PlayArea.clearButtons()
+          processPlayPositionSelection()
+        end
+      end
+    end
+  end
+
+  if not validPositionFound then
+    broadcastToColor("No empty positions available!", playerColor)
+    activeAction = nil
+  end
+end
+
+function processPlayPositionSelection()
+  if not activeAction or not activeAction.targetPosition then return end
+
+  if isInHand(activeAction.card) then
+    -- if card is in hand: highlight cards to pay mana
+    startManaSelection()
   else
-    DeckLib.placeOrMergeIntoDeck(card, selectedPosition)
+    DeckLib.placeOrMergeIntoDeck(activeAction.card, activeAction.targetPosition)
   end
 end
 
 function xml_abortManaSelection(player)
+  broadcastToColor("Mana selection aborted!", player.color)
 
+  -- revert tapping of selected cards
+  if activeAction and activeAction.selectedMana then
+    for _, card in ipairs(activeAction.selectedMana) do
+      card.setRotationSmooth(getDefaultRotation(card))
+    end
+  end
+
+  -- reset state
+  activeAction = nil
 end
 
 function startManaSelection(card)
+  if not activeAction then return end
+  broadcastToColor("Select cards to pay the mana cost!", activePlayer)
 
+  -- highlight all eligible cards
+  -- TODO
+end
+
+function getDefaultRotation(card)
+  return card.getRotation():setAt("y", (card.getPosition().z > 0) and 0 or 180)
+end
+
+function getMetadata(card)
+  return JSON.decode(card.getGMNotes()) or {}
 end
 
 function isInHand(object)
@@ -286,8 +370,29 @@ function contextPlayAsEnergy(playerColor, _, card)
     return
   end
 
-  -- place in "Energies" zone, faceup and with offset to existing ones (add snaps)
-  -- TODO
+  if activeAction then
+    broadcastToColor("There's already an ongoing action!", playerColor)
+    return
+  end
+
+  -- place in "Energies" zone, faceup and with offset to existing ones
+  local PlayArea     = getObjectByName("Play Area")
+  local searchPos    = PlayArea.positionToWorld(ZONES[playerColor]["Energy"][3])
+  local searchResult = SearchLib.inArea(searchPos, nil, Vector(3, 1, 6), "isCardOrDeck")
+
+  if #searchResult > 5 then
+    broadcastToColor("No empty spot in energy area!", playerColor)
+    return
+  end
+
+  local pos = PlayArea.positionToWorld(ZONES[playerColor]["Energy"][#searchResult + 1]) + Vector(0, 0.1 * #searchResult, 0)
+  card.setPosition(pos)
+  card.setRotation(getDefaultRotation(card) + Vector(0, 180, 0))
+  broadcastToColor("Played '" .. card.getName() .. "' as energy.", playerColor)
+end
+
+function isEmpty(pos)
+  return #SearchLib.atPosition(pos, "isCardOrDeck") == 0
 end
 
 function contextFren(playerColor, _, card)
@@ -296,9 +401,20 @@ function contextFren(playerColor, _, card)
     return
   end
 
-  -- non-fren card: same as play, but only on top of another card with the same type-attribute
+  if activeAction then
+    broadcastToColor("There's already an ongoing action!", playerColor)
+    return
+  end
 
-  -- fren card: select cards to be grouped under this card, combine into stack
+  local md = getMetadata(card)
+
+  if md.type == "fren" then
+    -- fren card: select cards to be grouped under this card, combine into stack
+    -- TODO
+  else
+    -- non-fren card: same as play, but only on top of another card with the same type-attribute
+    -- TODO
+  end
 end
 
 function contextArchive(playerColor, _, card)
@@ -409,11 +525,27 @@ ZONES = {
     Archive = Vector(-0.773, 0.11, 0.597),
     Avatar  = Vector(-0.773, 0.11, 0.239),
     Soul    = Vector(-0.773, 0.11, 0.848),
+    Energy  = {
+      Vector(0.778, 0.11, 0.495),
+      Vector(0.778, 0.11, 0.560),
+      Vector(0.778, 0.11, 0.625),
+      Vector(0.778, 0.11, 0.690),
+      Vector(0.778, 0.11, 0.755),
+      Vector(0.778, 0.11, 0.820)
+    }
   },
   Blue = {
     Archive = Vector(0.773, 0.11, -0.597),
     Avatar  = Vector(0.773, 0.11, -0.239),
     Soul    = Vector(0.773, 0.11, -0.848),
+    Energy  = {
+      Vector(-0.778, 0.11, -0.495),
+      Vector(-0.778, 0.11, -0.560),
+      Vector(-0.778, 0.11, -0.625),
+      Vector(-0.778, 0.11, -0.690),
+      Vector(-0.778, 0.11, -0.755),
+      Vector(-0.778, 0.11, -0.820)
+    }
   },
   Shared = {
     Narrative = Vector(-0.773, 0.11, -0.117),

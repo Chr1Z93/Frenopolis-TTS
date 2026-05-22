@@ -1,0 +1,12 @@
+{
+  "labels": [
+    {
+      "displayed": "NotInteractable",
+      "normalized": "notinteractable"
+    },
+    {
+      "displayed": "PlayerCard",
+      "normalized": "playercard"
+    }
+  ]
+}
