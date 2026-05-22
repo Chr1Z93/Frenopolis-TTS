@@ -321,14 +321,15 @@ function processPlayPositionSelection()
 
   if isInHand(activeAction.card) then
     -- if card is in hand: highlight cards to pay mana
-    startManaSelection()
+    startCostPayment()
   else
-    DeckLib.placeOrMergeIntoDeck(activeAction.card, activeAction.targetPosition)
+    activeAction = nil
+    DeckLib.placeOrMergeIntoDeck(activeAction.card, activeAction.targetPosition, getDefaultRotation(activeAction.card))
   end
 end
 
-function xml_abortManaSelection(player)
-  broadcastToColor("Mana selection aborted!", player.color)
+function xml_abortCostPayment(player)
+  broadcastToColor("Cost payment aborted!", player.color)
 
   -- revert tapping of selected cards
   if activeAction and activeAction.selectedMana then
@@ -341,12 +342,80 @@ function xml_abortManaSelection(player)
   activeAction = nil
 end
 
-function startManaSelection(card)
-  if not activeAction then return end
-  broadcastToColor("Select cards to pay the mana cost!", activePlayer)
+function startCostPayment()
+  if not activeAction or not activeAction.card then return end
+
+  local colorCost     = activeAction.md.colorCost or 0
+  local colorlessCost = activeAction.md.colorlessCost or 0
+
+  broadcastToColor("Select untapped cards to pay the cost! color / colorless : " ..
+    colorCost .. "/" .. colorlessCost, activePlayer)
 
   -- highlight all eligible cards
-  -- TODO
+  local energyCards = getEnergyCards()
+
+  local cost = colorCost + colorlessCost
+  local availableManaCount = 0
+
+  for _, card in ipairs(energyCards) do
+    -- Check if the energy card is untapped (horizontal rotation check)
+    local currentYRot = math.abs(card.getRotation().y % 360)
+    local isTapped = (math.abs(currentYRot - 90) < 15 or math.abs(currentYRot - 270) < 15)
+
+    if not isTapped then
+      availableManaCount = availableManaCount + 1
+
+      -- Overlay a selection button directly onto the card asset
+      card.createButton({
+        click_function = "xml_payManaWithCard_" .. card.getGUID(),
+        function_owner = self,
+        position       = Vector(-2, 0.5, 0),
+        rotation       = Vector(0, 0, 0),
+        width          = 600,
+        height         = 600,
+        scale          = Vector(0.5, 0.5, 0.5),
+        color          = { 0, 1, 0, 0.9 },
+        tooltip        = "Tap for Mana"
+      })
+
+      -- Dynamically construct the global callback wrapper unique to this card asset
+      _G["xml_payManaWithCard_" .. card.getGUID()] = function(obj, clickerColor)
+        if clickerColor ~= activePlayer then return end
+
+        card.clearButtons()
+        card.setRotationSmooth(card.getRotation() + Vector(0, 90, 0))
+        table.insert(activeAction.selectedMana, card)
+
+        -- Evaluate if total casting requirements have been satisfied
+        if #activeAction.selectedMana >= cost then
+          clearAllManaButtons(energyCards)
+          finalizeManaPayment()
+        else
+          local remaining = cost - #activeAction.selectedMana
+          broadcastToColor("Need " .. remaining .. " more mana.", activePlayer)
+        end
+      end
+    end
+  end
+
+  -- Cancel step if the player lacks enough untapped energy units to meet costs
+  if availableManaCount < cost then
+    broadcastToColor("You do not have enough untapped mana!", activePlayer, "Red")
+    xml_abortCostPayment(Player[activePlayer])
+  end
+end
+
+function clearAllManaButtons(cardList)
+  for _, card in ipairs(cardList) do
+    card.clearButtons()
+  end
+end
+
+function finalizeManaPayment()
+  if not activeAction then return end
+  DeckLib.placeOrMergeIntoDeck(activeAction.card, activeAction.targetPosition, getDefaultRotation(activeAction.card))
+  broadcastToColor("Card played successfully!", activePlayer, "Green")
+  activeAction = nil
 end
 
 function getDefaultRotation(card)
@@ -376,19 +445,23 @@ function contextPlayAsEnergy(playerColor, _, card)
   end
 
   -- place in "Energies" zone, faceup and with offset to existing ones
-  local PlayArea     = getObjectByName("Play Area")
-  local searchPos    = PlayArea.positionToWorld(ZONES[playerColor]["Energy"][3])
-  local searchResult = SearchLib.inArea(searchPos, nil, Vector(3, 1, 6), "isCardOrDeck")
-
-  if #searchResult > 5 then
+  local energyCards = getEnergyCards()
+  if #energyCards > 5 then
     broadcastToColor("No empty spot in energy area!", playerColor)
     return
   end
 
-  local pos = PlayArea.positionToWorld(ZONES[playerColor]["Energy"][#searchResult + 1]) + Vector(0, 0.1 * #searchResult, 0)
-  card.setPosition(pos)
+  local PlayArea = getObjectByName("Play Area")
+  local pos      = PlayArea.positionToWorld(ZONES[playerColor]["Energy"][#energyCards + 1])
+  card.setPosition(pos + Vector(0, 0.1 * #energyCards, 0))
   card.setRotation(getDefaultRotation(card) + Vector(0, 180, 0))
   broadcastToColor("Played '" .. card.getName() .. "' as energy.", playerColor)
+end
+
+function getEnergyCards()
+  local PlayArea  = getObjectByName("Play Area")
+  local searchPos = PlayArea.positionToWorld(ZONES[activePlayer]["Energy"][3])
+  return SearchLib.inArea(searchPos, nil, Vector(3, 1, 6), "isCard")
 end
 
 function isEmpty(pos)
