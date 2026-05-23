@@ -8,7 +8,7 @@
   },
   "Nickname": "shut it down",
   "GUID": "fren122",
-  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"9\", \"colorCost\": \"5\", \"colorlessCost\": \"0\", \"color\": \"violet\", \"deck\": \"VIOLET\"}",
+  "GMNotes": "{\"type\": \"meme\", \"color\": \"violet\", \"deck\": \"VIOLET\", \"stat\": 9, \"colorCost\": 5, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

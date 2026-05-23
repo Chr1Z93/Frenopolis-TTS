@@ -8,7 +8,7 @@
   },
   "Nickname": "human transmutation",
   "GUID": "fren013",
-  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"7\", \"colorCost\": \"1\", \"colorlessCost\": \"2\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"meme\", \"color\": \"orange\", \"deck\": \"ORANGE\", \"stat\": 7, \"colorCost\": 1, \"colorlessCost\": 2}",
   "Tags": [
     "PlayerCard"
   ],

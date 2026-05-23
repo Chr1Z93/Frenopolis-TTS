@@ -8,7 +8,7 @@
   },
   "Nickname": "carpenterion",
   "GUID": "fren055",
-  "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"5\", \"colorCost\": \"5\", \"colorlessCost\": \"0\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"structure\", \"color\": \"red\", \"deck\": \"RED\", \"stat\": 5, \"colorCost\": 5, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

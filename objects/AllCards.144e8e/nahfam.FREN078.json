@@ -8,7 +8,7 @@
   },
   "Nickname": "nah fam",
   "GUID": "fren078",
-  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"1\", \"colorCost\": \"2\", \"colorlessCost\": \"0\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"meme\", \"color\": \"red\", \"deck\": \"RED\", \"stat\": 1, \"colorCost\": 2, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

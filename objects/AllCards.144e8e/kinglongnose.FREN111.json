@@ -8,7 +8,7 @@
   },
   "Nickname": "king longnose",
   "GUID": "fren111",
-  "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"2\", \"colorCost\": \"1\", \"colorlessCost\": \"1\", \"color\": \"black\", \"deck\": \"VIOLET\"}",
+  "GMNotes": "{\"type\": \"entity\", \"color\": \"black\", \"deck\": \"VIOLET\", \"stat\": 2, \"colorCost\": 1, \"colorlessCost\": 1}",
   "Tags": [
     "PlayerCard"
   ],

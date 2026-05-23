@@ -8,7 +8,7 @@
   },
   "Nickname": "were back",
   "GUID": "fren089",
-  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"1\", \"colorCost\": \"1\", \"colorlessCost\": \"1\", \"color\": \"black\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"meme\", \"color\": \"black\", \"deck\": \"RED\", \"stat\": 1, \"colorCost\": 1, \"colorlessCost\": 1}",
   "Tags": [
     "PlayerCard"
   ],

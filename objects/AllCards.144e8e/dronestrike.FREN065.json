@@ -8,7 +8,7 @@
   },
   "Nickname": "drone strike",
   "GUID": "fren065",
-  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"7\", \"colorCost\": \"4\", \"colorlessCost\": \"1\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"meme\", \"color\": \"red\", \"deck\": \"RED\", \"stat\": 7, \"colorCost\": 4, \"colorlessCost\": 1}",
   "Tags": [
     "PlayerCard"
   ],

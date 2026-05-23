@@ -8,7 +8,7 @@
   },
   "Nickname": "snibs",
   "GUID": "fren087",
-  "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"1\", \"colorCost\": \"2\", \"colorlessCost\": \"0\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"entity\", \"color\": \"red\", \"deck\": \"RED\", \"stat\": 1, \"colorCost\": 2, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

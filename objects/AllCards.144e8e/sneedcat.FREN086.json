@@ -8,7 +8,7 @@
   },
   "Nickname": "sneedcat",
   "GUID": "fren086",
-  "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"3\", \"colorCost\": \"2\", \"colorlessCost\": \"0\", \"color\": \"black\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"entity\", \"color\": \"black\", \"deck\": \"RED\", \"stat\": 3, \"colorCost\": 2, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

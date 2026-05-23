@@ -8,7 +8,7 @@
   },
   "Nickname": "happening bunker",
   "GUID": "fren071",
-  "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"4\", \"colorCost\": \"4\", \"colorlessCost\": \"0\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"structure\", \"color\": \"red\", \"deck\": \"RED\", \"stat\": 4, \"colorCost\": 4, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

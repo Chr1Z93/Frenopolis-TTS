@@ -8,7 +8,7 @@
   },
   "Nickname": "wesker",
   "GUID": "fren131",
-  "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"7\", \"colorCost\": \"3\", \"colorlessCost\": \"0\", \"color\": \"violet\", \"deck\": \"VIOLET\"}",
+  "GMNotes": "{\"type\": \"entity\", \"color\": \"violet\", \"deck\": \"VIOLET\", \"stat\": 7, \"colorCost\": 3, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

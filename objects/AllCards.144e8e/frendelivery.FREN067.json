@@ -8,7 +8,7 @@
   },
   "Nickname": "fren delivery",
   "GUID": "fren067",
-  "GMNotes": "{\"type\": \"fren\", \"subType\": \"entity\", \"stat\": \"2\", \"colorCost\": \"\", \"colorlessCost\": \"\", \"color\": \"green\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"fren\", \"color\": \"green\", \"deck\": \"RED\", \"subType\": \"entity\", \"stat\": 2}",
   "Tags": [
     "PlayerCard"
   ],

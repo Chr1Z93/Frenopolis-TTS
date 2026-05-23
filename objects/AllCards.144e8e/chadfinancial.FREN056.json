@@ -8,7 +8,7 @@
   },
   "Nickname": "chad financial",
   "GUID": "fren056",
-  "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"7\", \"colorCost\": \"5\", \"colorlessCost\": \"0\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"entity\", \"color\": \"red\", \"deck\": \"RED\", \"stat\": 7, \"colorCost\": 5, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

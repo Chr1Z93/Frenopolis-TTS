@@ -13,7 +13,7 @@ local TableLib               = require("TableLib")
 local PHASE_TRACKER_HEIGHT   = 200
 local PHASE_TRACKER_WIDTH    = 800
 local PHASE_TRACKER_FONTSIZE = 100
-local PHASE_TRACKER_SPACING  = 25
+local PHASE_TRACKER_SPACING  = 30
 
 local activePlayer           = "Yellow"
 local activePhase            = 1
@@ -111,6 +111,11 @@ function createGlobalXml()
       { tag = "Panel" },
       {
         tag        = "Button",
+        attributes = { onClick = "xml_abortAction", color = "Blue", text = "→ Abort Action" },
+      },
+      { tag = "Panel" },
+      {
+        tag        = "Button",
         attributes = {
           raycastTarget = false,
           color         = "Black",
@@ -151,6 +156,8 @@ function createGlobalXml()
 
   for _, data in ipairs(sideButtons.children) do
     data.attributes               = data.attributes or {}
+    data.attributes.outline       = "Black"
+    data.attributes.outlineSize   = "10 10"
     data.attributes.padding       = "50 0 0 0"
     data.attributes.textAlignment = "MiddleLeft"
     data.attributes.fontSize      = PHASE_TRACKER_FONTSIZE
@@ -253,7 +260,7 @@ function addContextMenu(card)
   end
 end
 
-function contextPlay(playerColor, _, card)
+function contextPlay(playerColor, _, card, fren)
   if playerColor ~= activePlayer then
     broadcastToColor("It's not your turn!", playerColor)
     return
@@ -266,13 +273,17 @@ function contextPlay(playerColor, _, card)
 
   local md     = getMetadata(card)
   activeAction = {
-    type         = "Play",
-    card         = card,
-    md           = md,
-    selectedMana = {}
+    type           = fren and "Fren" or "Play",
+    card           = card,
+    md             = md,
+    selectedEnergy = {}
   }
 
-  broadcastToColor("Playing of '" .. card.getName() .. "' initiated!", playerColor)
+  if fren then
+    broadcastToColor("Frenning of '" .. card.getName() .. "' initiated!", playerColor)
+  else
+    broadcastToColor("Playing of '" .. card.getName() .. "' initiated!", playerColor)
+  end
 
   -- highlight valid spots
   local PlayArea           = getObjectByName("Play Area")
@@ -280,12 +291,21 @@ function contextPlay(playerColor, _, card)
   local validPositionFound = false
 
   for i, snap in ipairs(snaps) do
-    local pos = PlayArea.positionToWorld(snap.position)
+    local pos            = PlayArea.positionToWorld(snap.position)
 
     -- limit to active players zones
-    if pos.x < 5 and pos.x > -5 and ((activePlayer == "Yellow" and pos.z < 0) or (activePlayer == "Blue" and pos.z > 0)) then
+    local onCorrectSide  = (activePlayer == "Yellow" and pos.z < 0) or (activePlayer == "Blue" and pos.z > 0)
+    local inPlayAbleZone = pos.x < 5 and pos.x > -5
+    if inPlayAbleZone and onCorrectSide then
       local searchResult = SearchLib.atPosition(pos, "isCard")
-      if #searchResult == 0 then
+
+      -- when a non-fren card is "frenned", it needs to go on top of another card
+      local isValid = #searchResult == 0
+      if fren then
+        isValid = #searchResult > 0
+      end
+
+      if isValid then
         validPositionFound = true
 
         -- display button for selection
@@ -302,7 +322,15 @@ function contextPlay(playerColor, _, card)
 
         _G["processPlayPositionSelection" .. i] = function(obj, clickerColor)
           if clickerColor ~= activePlayer or not activeAction then return end
-          activeAction.targetPosition = pos
+          if fren then
+            if activePlayer == "Yellow" then
+              activeAction.targetPosition = pos + Vector(0, 0.1, 0.6) * #searchResult
+            else
+              activeAction.targetPosition = pos - Vector(0, 0.1, 0.6) * #searchResult
+            end
+          else
+            activeAction.targetPosition = pos
+          end
           PlayArea.clearButtons()
           processPlayPositionSelection()
         end
@@ -311,7 +339,7 @@ function contextPlay(playerColor, _, card)
   end
 
   if not validPositionFound then
-    broadcastToColor("No empty positions available!", playerColor)
+    broadcastToColor("No valid positions available!", playerColor)
     activeAction = nil
   end
 end
@@ -328,46 +356,58 @@ function processPlayPositionSelection()
   end
 end
 
-function xml_abortCostPayment(player)
-  broadcastToColor("Cost payment aborted!", player.color)
+function xml_abortAction(player)
+  if not activePlayer == player.color then return end
+  if not activeAction then return end
 
-  -- revert tapping of selected cards
-  if activeAction and activeAction.selectedMana then
-    for _, card in ipairs(activeAction.selectedMana) do
-      card.setRotationSmooth(getDefaultRotation(card))
+  if activeAction.type == "Play" then
+    broadcastToColor("Play action aborted!", player.color)
+
+    -- revert tapping of selected cards
+    if activeAction and activeAction.selectedEnergy then
+      for _, card in ipairs(activeAction.selectedEnergy) do
+        card.setRotationSmooth(getDefaultRotation(card) + Vector(0, 180, 0))
+      end
     end
+  elseif activeAction.type == "Fren" then
+    broadcastToColor("Fren action aborted!", player.color)
   end
+
+  clearButtonsFromCards(getObjects())
 
   -- reset state
   activeAction = nil
 end
 
+function formatEnergyString(colorCost, colorlessCost, targetColor)
+  local colorObj     = Color.fromString(targetColor or "White")
+  local hexColor     = colorObj:toHex()
+  formattedColorPart = "[" .. hexColor .. "]" .. colorCost .. "[-]"
+  return formattedColorPart .. " / " .. colorlessCost
+end
+
 function startCostPayment()
   if not activeAction or not activeAction.card then return end
 
+  local targetColor   = activeAction.md.color or "none"
   local colorCost     = activeAction.md.colorCost or 0
   local colorlessCost = activeAction.md.colorlessCost or 0
 
-  broadcastToColor("Select untapped cards to pay the cost! color / colorless : " ..
-    colorCost .. "/" .. colorlessCost, activePlayer)
+  local energyString  = formatEnergyString(colorCost, colorlessCost, targetColor)
+  broadcastToColor("Select untapped cards to pay the cost! " .. energyString, activePlayer)
 
   -- highlight all eligible cards
   local energyCards = getEnergyCards()
 
-  local cost = colorCost + colorlessCost
-  local availableManaCount = 0
-
-  for _, card in ipairs(energyCards) do
-    -- Check if the energy card is untapped (horizontal rotation check)
-    local currentYRot = math.abs(card.getRotation().y % 360)
-    local isTapped = (math.abs(currentYRot - 90) < 15 or math.abs(currentYRot - 270) < 15)
+  for _, energyCard in ipairs(energyCards) do
+    -- check if the energy card is untapped (horizontal rotation check)
+    local currentYRot = energyCard.getRotation().y
+    local isTapped    = math.abs(currentYRot - 90) < 15 or math.abs(currentYRot - 270) < 15
 
     if not isTapped then
-      availableManaCount = availableManaCount + 1
-
-      -- Overlay a selection button directly onto the card asset
-      card.createButton({
-        click_function = "xml_payManaWithCard_" .. card.getGUID(),
+      -- selection button next to the card
+      energyCard.createButton({
+        click_function = "onClick_payCostWithCard_" .. energyCard.getGUID(),
         function_owner = self,
         position       = Vector(-2, 0.5, 0),
         rotation       = Vector(0, 0, 0),
@@ -375,43 +415,80 @@ function startCostPayment()
         height         = 600,
         scale          = Vector(0.5, 0.5, 0.5),
         color          = { 0, 1, 0, 0.9 },
-        tooltip        = "Tap for Mana"
+        tooltip        = "Use Energy"
       })
 
-      -- Dynamically construct the global callback wrapper unique to this card asset
-      _G["xml_payManaWithCard_" .. card.getGUID()] = function(obj, clickerColor)
+      -- dynamically construct the global callback wrapper unique to this card
+      _G["onClick_payCostWithCard_" .. energyCard.getGUID()] = function(obj, clickerColor)
         if clickerColor ~= activePlayer then return end
 
-        card.clearButtons()
-        card.setRotationSmooth(card.getRotation() + Vector(0, 90, 0))
-        table.insert(activeAction.selectedMana, card)
+        energyCard.clearButtons()
+        energyCard.setRotationSmooth(energyCard.getRotation() + Vector(0, 90, 0))
+        table.insert(activeAction.selectedEnergy, energyCard)
 
-        -- Evaluate if total casting requirements have been satisfied
-        if #activeAction.selectedMana >= cost then
-          clearAllManaButtons(energyCards)
-          finalizeManaPayment()
+        -- evaluate if total cost is paid
+        local remainingColorCost, remainingColorlessCost = getRemainingCost()
+        if remainingColorCost == 0 and remainingColorlessCost == 0 then
+          clearButtonsFromCards(energyCards)
+          finalizeEnergyPayment()
         else
-          local remaining = cost - #activeAction.selectedMana
-          broadcastToColor("Need " .. remaining .. " more mana.", activePlayer)
+          local remainingString = formatEnergyString(remainingColorCost, remainingColorlessCost, targetColor)
+          broadcastToColor("Need more energy: " .. remainingString, activePlayer)
         end
       end
     end
   end
+end
 
-  -- Cancel step if the player lacks enough untapped energy units to meet costs
-  if availableManaCount < cost then
-    broadcastToColor("You do not have enough untapped mana!", activePlayer, "Red")
-    xml_abortCostPayment(Player[activePlayer])
+function getRemainingCost()
+  if not activeAction or not activeAction.card or not activeAction.selectedEnergy or not activeAction.md then return end
+
+  local targetColor        = activeAction.md.color or "none"
+  local colorCost          = activeAction.md.colorCost or 0
+  local colorlessCost      = activeAction.md.colorlessCost or 0
+  local paidColorCount     = 0
+  local paidColorlessCount = 0
+
+  for _, energyCard in ipairs(activeAction.selectedEnergy) do
+    local energyMd = getMetadata(energyCard)
+    local energyColor = energyMd.color or "none"
+
+    -- match the card's color property to determine how it pays
+    if energyColor == targetColor then
+      paidColorCount = paidColorCount + 1
+    else
+      paidColorlessCount = paidColorlessCount + 1
+    end
+  end
+
+  -- deduct matching paid colors from the specific color requirement
+  local remainingColorCost = colorCost - paidColorCount
+
+  -- if the player paid excess matching colors, they spill over into the colorless requirement
+  if remainingColorCost < 0 then
+    paidColorlessCount = paidColorlessCount + math.abs(remainingColorCost)
+    remainingColorCost = 0
+  end
+
+  -- deduct remaining payments from the colorless requirement
+  local remainingColorlessCost = colorlessCost - paidColorlessCount
+  if remainingColorlessCost < 0 then
+    remainingColorlessCost = 0
+  end
+
+  -- return the breakdowns as well as a total aggregate number
+  return remainingColorCost, remainingColorlessCost
+end
+
+function clearButtonsFromCards(objectList)
+  for _, obj in ipairs(objectList) do
+    if obj.type == "Card" then
+      obj.clearButtons()
+    end
   end
 end
 
-function clearAllManaButtons(cardList)
-  for _, card in ipairs(cardList) do
-    card.clearButtons()
-  end
-end
-
-function finalizeManaPayment()
+function finalizeEnergyPayment()
   if not activeAction then return end
   DeckLib.placeOrMergeIntoDeck(activeAction.card, activeAction.targetPosition, getDefaultRotation(activeAction.card))
   broadcastToColor("Card played successfully!", activePlayer, "Green")
@@ -483,11 +560,110 @@ function contextFren(playerColor, _, card)
 
   if md.type == "fren" then
     -- fren card: select cards to be grouped under this card, combine into stack
-    -- TODO
+    local requiredCount = md.stat
+    activeAction = {
+      type                = "Fren",
+      card                = card,
+      md                  = md,
+      selectedFrenTargets = {}
+    }
+
+    broadcastToColor("Frenning initiated! Select " .. requiredCount .. " cards.", playerColor)
+    startFrenTargetSelection()
   else
     -- non-fren card: same as play, but only on top of another card with the same type-attribute
-    -- TODO
+    contextPlay(playerColor, _, card, true)
   end
+end
+
+function getFrenIngredients()
+  local ingredients = {}
+
+  -- TODO: scan relevant zone
+  for _, obj in ipairs(getObjects()) do
+    if obj.type == "Card" then
+      table.insert(ingredients, obj)
+    end
+  end
+
+  return ingredients
+end
+
+function startFrenTargetSelection()
+  if not activeAction or activeAction.type ~= "Fren" then return end
+
+  local eligibleCards = getFrenIngredients()
+
+  for i, obj in ipairs(eligibleCards) do
+    -- ensure we don't allow a player to pick the Fren card itself, or cards in hands
+    if obj ~= activeAction.card and not isInHand(obj) then
+      -- Generate selection indicators offset horizontally next to the cards
+      obj.createButton({
+        click_function = "onClick_selectFrenIngredient_" .. i,
+        function_owner = self,
+        position       = Vector(0, 0.5, 1),
+        rotation       = Vector(0, 0, 0),
+        width          = 600,
+        height         = 600,
+        scale          = Vector(0.5, 0.5, 0.5),
+        color          = { 1, 0.5, 0, 0.9 },
+        tooltip        = "Absorb into Fren Stack"
+      })
+
+      -- Bind input registration globally to this specific item instance
+      _G["onClick_selectFrenIngredient_" .. i] = function(clickedObj, clickerColor)
+        if clickerColor ~= activePlayer then return end
+        processFrenSelectionClick(obj)
+      end
+    end
+  end
+end
+
+function processFrenSelectionClick(chosenCard)
+  if not activeAction then return end
+
+  -- ensure duplicate mouse-clicks on the same target are ignored
+  for _, item in ipairs(activeAction.selectedFrenTargets) do
+    if item == chosenCard then return end
+  end
+
+  chosenCard.clearButtons()
+  chosenCard.highlightOn("Orange")
+  table.insert(activeAction.selectedFrenTargets, chosenCard)
+
+  local currentCount = #activeAction.selectedFrenTargets
+  local maxNeeded    = activeAction.md.stat
+
+  if currentCount >= maxNeeded then
+    finalizeFrenStack()
+  else
+    broadcastToColor("Selected (" .. currentCount .. "/" .. maxNeeded .. ") targets.", activePlayer)
+  end
+end
+
+function finalizeFrenStack()
+  if not activeAction or activeAction.type ~= "FrenCard" then return end
+
+  local masterCard  = activeAction.card
+  local ingredients = activeAction.selectedFrenTargets
+
+  -- The base positions coordinates where the main composite framework structure rests
+  local basePos     = masterCard.getPosition()
+  local rot         = getDefaultRotation(masterCard)
+
+  -- Cascade and align ingredients cleanly below the primary entity card
+  for i, ingredient in ipairs(ingredients) do
+    local offsetDirection = (activePlayer == "Yellow") and 1 or -1
+
+    -- Align and stack with structural 0.6 unit Z spacing variations
+    local targetPosition = basePos + Vector(0, 0.1, 0.6 * offsetDirection) * i
+    ingredient.setPosition(targetPosition)
+    ingredient.setRotation(rot)
+    masterCard.addAttachment(ingredient)
+  end
+
+  broadcastToColor("Fren completed!", activePlayer, "Green")
+  activeAction = nil
 end
 
 function contextArchive(playerColor, _, card)

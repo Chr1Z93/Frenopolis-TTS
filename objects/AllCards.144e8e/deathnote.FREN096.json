@@ -8,7 +8,7 @@
   },
   "Nickname": "death note",
   "GUID": "fren096",
-  "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"5\", \"colorCost\": \"5\", \"colorlessCost\": \"0\", \"color\": \"violet\", \"deck\": \"VIOLET\"}",
+  "GMNotes": "{\"type\": \"structure\", \"color\": \"violet\", \"deck\": \"VIOLET\", \"stat\": 5, \"colorCost\": 5, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

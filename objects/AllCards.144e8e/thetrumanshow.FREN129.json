@@ -8,7 +8,7 @@
   },
   "Nickname": "the truman show",
   "GUID": "fren129",
-  "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"3\", \"colorCost\": \"2\", \"colorlessCost\": \"0\", \"color\": \"black\", \"deck\": \"VIOLET\"}",
+  "GMNotes": "{\"type\": \"structure\", \"color\": \"black\", \"deck\": \"VIOLET\", \"stat\": 3, \"colorCost\": 2, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

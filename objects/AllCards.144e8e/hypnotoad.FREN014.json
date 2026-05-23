@@ -8,7 +8,7 @@
   },
   "Nickname": "hypnotoad",
   "GUID": "fren014",
-  "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"1\", \"colorCost\": \"1\", \"colorlessCost\": \"0\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"entity\", \"color\": \"orange\", \"deck\": \"ORANGE\", \"stat\": 1, \"colorCost\": 1, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

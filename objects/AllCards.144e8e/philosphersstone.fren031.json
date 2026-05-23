@@ -8,7 +8,7 @@
   },
   "Nickname": "philospher's stone",
   "GUID": "fren031",
-  "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"4\", \"colorCost\": \"3\", \"colorlessCost\": \"0\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"structure\", \"color\": \"orange\", \"deck\": \"ORANGE\", \"stat\": 4, \"colorCost\": 3, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

@@ -8,7 +8,7 @@
   },
   "Nickname": "transcendence",
   "GUID": "fren042",
-  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"5\", \"colorCost\": \"3\", \"colorlessCost\": \"1\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"meme\", \"color\": \"orange\", \"deck\": \"ORANGE\", \"stat\": 5, \"colorCost\": 3, \"colorlessCost\": 1}",
   "Tags": [
     "PlayerCard"
   ],

@@ -8,7 +8,7 @@
   },
   "Nickname": "fire elemental",
   "GUID": "fren006",
-  "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"3\", \"colorCost\": \"1\", \"colorlessCost\": \"2\", \"color\": \"black\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"entity\", \"color\": \"black\", \"deck\": \"ORANGE\", \"stat\": 3, \"colorCost\": 1, \"colorlessCost\": 2}",
   "Tags": [
     "PlayerCard"
   ],

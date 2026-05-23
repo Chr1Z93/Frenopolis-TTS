@@ -8,7 +8,7 @@
   },
   "Nickname": "ben shapiro",
   "GUID": "fren050",
-  "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"3\", \"colorCost\": \"1\", \"colorlessCost\": \"2\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"entity\", \"color\": \"red\", \"deck\": \"RED\", \"stat\": 3, \"colorCost\": 1, \"colorlessCost\": 2}",
   "Tags": [
     "PlayerCard"
   ],

@@ -8,7 +8,7 @@
   },
   "Nickname": "frenworld",
   "GUID": "fren009",
-  "GMNotes": "{\"type\": \"fren\", \"subType\": \"meme\", \"stat\": \"2\", \"colorCost\": \"\", \"colorlessCost\": \"\", \"color\": \"green\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"fren\", \"color\": \"green\", \"deck\": \"ORANGE\", \"subType\": \"meme\", \"stat\": 2}",
   "Tags": [
     "PlayerCard"
   ],

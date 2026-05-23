@@ -8,7 +8,7 @@
   },
   "Nickname": "I am the meds",
   "GUID": "fren016",
-  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"1\", \"colorCost\": \"1\", \"colorlessCost\": \"0\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"meme\", \"color\": \"orange\", \"deck\": \"ORANGE\", \"stat\": 1, \"colorCost\": 1, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

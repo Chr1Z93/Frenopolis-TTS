@@ -8,7 +8,7 @@
   },
   "Nickname": "heavenly hotline",
   "GUID": "fren010",
-  "GMNotes": "{\"type\": \"fren\", \"subType\": \"energy\", \"stat\": \"3\", \"colorCost\": \"\", \"colorlessCost\": \"\", \"color\": \"green\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"fren\", \"color\": \"green\", \"deck\": \"ORANGE\", \"subType\": \"energy\", \"stat\": 3}",
   "Tags": [
     "PlayerCard"
   ],

@@ -8,7 +8,7 @@
   },
   "Nickname": "its over",
   "GUID": "fren074",
-  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"3\", \"colorCost\": \"1\", \"colorlessCost\": \"1\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"meme\", \"color\": \"red\", \"deck\": \"RED\", \"stat\": 3, \"colorCost\": 1, \"colorlessCost\": 1}",
   "Tags": [
     "PlayerCard"
   ],

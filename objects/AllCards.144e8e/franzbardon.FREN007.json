@@ -8,7 +8,7 @@
   },
   "Nickname": "franz bardon",
   "GUID": "fren007",
-  "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"4\", \"colorCost\": \"4\", \"colorlessCost\": \"1\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"entity\", \"color\": \"orange\", \"deck\": \"ORANGE\", \"stat\": 4, \"colorCost\": 4, \"colorlessCost\": 1}",
   "Tags": [
     "PlayerCard"
   ],

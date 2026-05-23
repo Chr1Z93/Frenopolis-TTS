@@ -8,7 +8,7 @@
   },
   "Nickname": "joshua graham",
   "GUID": "fren022",
-  "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"5\", \"colorCost\": \"1\", \"colorlessCost\": \"2\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"entity\", \"color\": \"orange\", \"deck\": \"ORANGE\", \"stat\": 5, \"colorCost\": 1, \"colorlessCost\": 2}",
   "Tags": [
     "PlayerCard"
   ],

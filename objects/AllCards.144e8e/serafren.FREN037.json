@@ -8,7 +8,7 @@
   },
   "Nickname": "serafren",
   "GUID": "fren037",
-  "GMNotes": "{\"type\": \"fren\", \"subType\": \"structure\", \"stat\": \"2\", \"colorCost\": \"\", \"colorlessCost\": \"\", \"color\": \"green\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"fren\", \"color\": \"green\", \"deck\": \"ORANGE\", \"subType\": \"structure\", \"stat\": 2}",
   "Tags": [
     "PlayerCard"
   ],

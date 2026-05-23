@@ -8,7 +8,7 @@
   },
   "Nickname": "be quiet",
   "GUID": "fren091",
-  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"4\", \"colorCost\": \"4\", \"colorlessCost\": \"0\", \"color\": \"violet\", \"deck\": \"VIOLET\"}",
+  "GMNotes": "{\"type\": \"meme\", \"color\": \"violet\", \"deck\": \"VIOLET\", \"stat\": 4, \"colorCost\": 4, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

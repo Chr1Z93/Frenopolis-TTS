@@ -8,7 +8,7 @@
   },
   "Nickname": "dr pepe",
   "GUID": "fren099",
-  "GMNotes": "{\"type\": \"fren\", \"subType\": \"entity\", \"stat\": \"2\", \"colorCost\": \"\", \"colorlessCost\": \"\", \"color\": \"green\", \"deck\": \"VIOLET\"}",
+  "GMNotes": "{\"type\": \"fren\", \"color\": \"green\", \"deck\": \"VIOLET\", \"subType\": \"entity\", \"stat\": 2}",
   "Tags": [
     "PlayerCard"
   ],

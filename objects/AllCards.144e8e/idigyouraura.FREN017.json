@@ -8,7 +8,7 @@
   },
   "Nickname": "i dig your aura",
   "GUID": "fren017",
-  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"3\", \"colorCost\": \"1\", \"colorlessCost\": \"2\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"meme\", \"color\": \"orange\", \"deck\": \"ORANGE\", \"stat\": 3, \"colorCost\": 1, \"colorlessCost\": 2}",
   "Tags": [
     "PlayerCard"
   ],

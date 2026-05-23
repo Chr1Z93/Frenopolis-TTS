@@ -8,7 +8,7 @@
   },
   "Nickname": "the chad ti",
   "GUID": "fren124",
-  "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"3\", \"colorCost\": \"2\", \"colorlessCost\": \"0\", \"color\": \"black\", \"deck\": \"VIOLET\"}",
+  "GMNotes": "{\"type\": \"entity\", \"color\": \"black\", \"deck\": \"VIOLET\", \"stat\": 3, \"colorCost\": 2, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

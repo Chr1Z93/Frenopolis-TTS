@@ -8,7 +8,7 @@
   },
   "Nickname": "honkler",
   "GUID": "fren012",
-  "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"7\", \"colorCost\": \"4\", \"colorlessCost\": \"1\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"entity\", \"color\": \"orange\", \"deck\": \"ORANGE\", \"stat\": 7, \"colorCost\": 4, \"colorlessCost\": 1}",
   "Tags": [
     "PlayerCard"
   ],

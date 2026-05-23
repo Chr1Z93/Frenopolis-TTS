@@ -8,7 +8,7 @@
   },
   "Nickname": "grug",
   "GUID": "fren070",
-  "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"6\", \"colorCost\": \"5\", \"colorlessCost\": \"0\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"entity\", \"color\": \"red\", \"deck\": \"RED\", \"stat\": 6, \"colorCost\": 5, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

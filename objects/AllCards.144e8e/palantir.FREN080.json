@@ -8,7 +8,7 @@
   },
   "Nickname": "palantir",
   "GUID": "fren080",
-  "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"4\", \"colorCost\": \"2\", \"colorlessCost\": \"1\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"structure\", \"color\": \"red\", \"deck\": \"RED\", \"stat\": 4, \"colorCost\": 2, \"colorlessCost\": 1}",
   "Tags": [
     "PlayerCard"
   ],

@@ -8,7 +8,7 @@
   },
   "Nickname": "immeasurable grace",
   "GUID": "fren019",
-  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"1\", \"colorCost\": \"1\", \"colorlessCost\": \"1\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"meme\", \"color\": \"orange\", \"deck\": \"ORANGE\", \"stat\": 1, \"colorCost\": 1, \"colorlessCost\": 1}",
   "Tags": [
     "PlayerCard"
   ],

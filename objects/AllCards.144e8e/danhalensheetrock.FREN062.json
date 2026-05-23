@@ -8,7 +8,7 @@
   },
   "Nickname": "dan halen sheetrock",
   "GUID": "fren062",
-  "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"6\", \"colorCost\": \"4\", \"colorlessCost\": \"1\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"structure\", \"color\": \"red\", \"deck\": \"RED\", \"stat\": 6, \"colorCost\": 4, \"colorlessCost\": 1}",
   "Tags": [
     "PlayerCard"
   ],

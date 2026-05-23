@@ -8,7 +8,7 @@
   },
   "Nickname": "governbot",
   "GUID": "fren106",
-  "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"6\", \"colorCost\": \"2\", \"colorlessCost\": \"1\", \"color\": \"violet\", \"deck\": \"VIOLET\"}",
+  "GMNotes": "{\"type\": \"structure\", \"color\": \"violet\", \"deck\": \"VIOLET\", \"stat\": 6, \"colorCost\": 2, \"colorlessCost\": 1}",
   "Tags": [
     "PlayerCard"
   ],

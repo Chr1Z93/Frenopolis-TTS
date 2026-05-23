@@ -8,7 +8,7 @@
   },
   "Nickname": "the gate",
   "GUID": "fren039",
-  "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"1\", \"colorCost\": \"2\", \"colorlessCost\": \"0\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"structure\", \"color\": \"orange\", \"deck\": \"ORANGE\", \"stat\": 1, \"colorCost\": 2, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

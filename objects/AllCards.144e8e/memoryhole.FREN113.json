@@ -8,7 +8,7 @@
   },
   "Nickname": "memory hole",
   "GUID": "fren113",
-  "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"7\", \"colorCost\": \"2\", \"colorlessCost\": \"1\", \"color\": \"violet\", \"deck\": \"VIOLET\"}",
+  "GMNotes": "{\"type\": \"structure\", \"color\": \"violet\", \"deck\": \"VIOLET\", \"stat\": 7, \"colorCost\": 2, \"colorlessCost\": 1}",
   "Tags": [
     "PlayerCard"
   ],

@@ -8,7 +8,7 @@
   },
   "Nickname": "you fool",
   "GUID": "fren045",
-  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"1\", \"colorCost\": \"1\", \"colorlessCost\": \"2\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"meme\", \"color\": \"orange\", \"deck\": \"ORANGE\", \"stat\": 1, \"colorCost\": 1, \"colorlessCost\": 2}",
   "Tags": [
     "PlayerCard"
   ],

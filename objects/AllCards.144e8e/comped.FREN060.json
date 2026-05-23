@@ -8,7 +8,7 @@
   },
   "Nickname": "comped",
   "GUID": "fren060",
-  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"4\", \"colorCost\": \"1\", \"colorlessCost\": \"0\", \"color\": \"black\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"meme\", \"color\": \"black\", \"deck\": \"RED\", \"stat\": 4, \"colorCost\": 1, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

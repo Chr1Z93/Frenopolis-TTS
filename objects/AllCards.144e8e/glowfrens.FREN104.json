@@ -8,7 +8,7 @@
   },
   "Nickname": "glowfrens",
   "GUID": "fren104",
-  "GMNotes": "{\"type\": \"fren\", \"subType\": \"energy\", \"stat\": \"2\", \"colorCost\": \"\", \"colorlessCost\": \"\", \"color\": \"green\", \"deck\": \"VIOLET\"}",
+  "GMNotes": "{\"type\": \"fren\", \"color\": \"green\", \"deck\": \"VIOLET\", \"subType\": \"energy\", \"stat\": 2}",
   "Tags": [
     "PlayerCard"
   ],

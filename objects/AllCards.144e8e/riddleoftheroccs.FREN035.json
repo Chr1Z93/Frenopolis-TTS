@@ -8,7 +8,7 @@
   },
   "Nickname": "riddle of the roccs",
   "GUID": "fren035",
-  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"2\", \"colorCost\": \"2\", \"colorlessCost\": \"0\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"meme\", \"color\": \"orange\", \"deck\": \"ORANGE\", \"stat\": 2, \"colorCost\": 2, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

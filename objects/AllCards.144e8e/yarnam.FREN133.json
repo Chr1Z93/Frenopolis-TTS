@@ -8,7 +8,7 @@
   },
   "Nickname": "yarnam",
   "GUID": "fren133",
-  "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"6\", \"colorCost\": \"2\", \"colorlessCost\": \"0\", \"color\": \"violet\", \"deck\": \"VIOLET\"}",
+  "GMNotes": "{\"type\": \"structure\", \"color\": \"violet\", \"deck\": \"VIOLET\", \"stat\": 6, \"colorCost\": 2, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

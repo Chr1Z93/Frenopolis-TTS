@@ -8,7 +8,7 @@
   },
   "Nickname": "the dwarf in the flask",
   "GUID": "fren125",
-  "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"4\", \"colorCost\": \"2\", \"colorlessCost\": \"1\", \"color\": \"violet\", \"deck\": \"VIOLET\"}",
+  "GMNotes": "{\"type\": \"entity\", \"color\": \"violet\", \"deck\": \"VIOLET\", \"stat\": 4, \"colorCost\": 2, \"colorlessCost\": 1}",
   "Tags": [
     "PlayerCard"
   ],

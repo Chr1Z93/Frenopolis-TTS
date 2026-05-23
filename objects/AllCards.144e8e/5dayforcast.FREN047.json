@@ -8,7 +8,7 @@
   },
   "Nickname": "5 day forcast",
   "GUID": "fren047",
-  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"3\", \"colorCost\": \"3\", \"colorlessCost\": \"2\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"meme\", \"color\": \"red\", \"deck\": \"RED\", \"stat\": 3, \"colorCost\": 3, \"colorlessCost\": 2}",
   "Tags": [
     "PlayerCard"
   ],

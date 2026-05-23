@@ -8,7 +8,7 @@
   },
   "Nickname": "cobsons casino",
   "GUID": "fren059",
-  "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"3\", \"colorCost\": \"2\", \"colorlessCost\": \"2\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"structure\", \"color\": \"red\", \"deck\": \"RED\", \"stat\": 3, \"colorCost\": 2, \"colorlessCost\": 2}",
   "Tags": [
     "PlayerCard"
   ],

@@ -42,18 +42,25 @@ class TTSCardGenerator:
                 card["GUID"] = f"fren{i:03}"
 
                 # Add metadata
-                card["GMNotes"] = json.dumps(
-                    {
-                        "type": row.get("TYPE", ""),
-                        "subType": row.get("SUB TYPE", ""),
-                        "stat": row.get("STAT", ""),
-                        "colorCost": row.get("COLOR COST", ""),
-                        "colorlessCost": row.get("COLORLESS COST", ""),
-                        "color": row.get("COLOR", ""),
-                        "deck": row.get("DECK", ""),
-                    },
-                    ensure_ascii=False,
-                )
+                metadata = {
+                    "type": row.get("TYPE", ""),
+                    "color": row.get("COLOR", ""),
+                    "deck": row.get("DECK", ""),
+                }
+                sub_type = row.get("SUB TYPE")
+                if sub_type:
+                    metadata["subType"] = sub_type
+
+                for json_key, excel_key in [
+                    ("stat", "STAT"),
+                    ("colorCost", "COLOR COST"),
+                    ("colorlessCost", "COLORLESS COST")
+                ]:
+                    val = row.get(excel_key)
+                    if val is not None and val != "":
+                        metadata[json_key] = int(val)
+
+                card["GMNotes"] = json.dumps(metadata, ensure_ascii=False)
                 card["Tags"] = ["PlayerCard"]
 
                 # Determine file name

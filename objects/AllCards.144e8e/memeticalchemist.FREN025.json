@@ -8,7 +8,7 @@
   },
   "Nickname": "memetic alchemist",
   "GUID": "fren025",
-  "GMNotes": "{\"type\": \"entity\", \"subType\": \"\", \"stat\": \"4\", \"colorCost\": \"2\", \"colorlessCost\": \"1\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"entity\", \"color\": \"orange\", \"deck\": \"ORANGE\", \"stat\": 4, \"colorCost\": 2, \"colorlessCost\": 1}",
   "Tags": [
     "PlayerCard"
   ],

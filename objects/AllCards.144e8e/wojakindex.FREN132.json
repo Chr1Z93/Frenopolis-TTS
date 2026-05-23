@@ -8,7 +8,7 @@
   },
   "Nickname": "wojak index",
   "GUID": "fren132",
-  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"4\", \"colorCost\": \"1\", \"colorlessCost\": \"0\", \"color\": \"black\", \"deck\": \"VIOLET\"}",
+  "GMNotes": "{\"type\": \"meme\", \"color\": \"black\", \"deck\": \"VIOLET\", \"stat\": 4, \"colorCost\": 1, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

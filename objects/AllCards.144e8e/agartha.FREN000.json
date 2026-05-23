@@ -8,7 +8,7 @@
   },
   "Nickname": "agartha",
   "GUID": "fren000",
-  "GMNotes": "{\"type\": \"structure\", \"subType\": \"\", \"stat\": \"5\", \"colorCost\": \"3\", \"colorlessCost\": \"0\", \"color\": \"orange\", \"deck\": \"ORANGE\"}",
+  "GMNotes": "{\"type\": \"structure\", \"color\": \"orange\", \"deck\": \"ORANGE\", \"stat\": 5, \"colorCost\": 3, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

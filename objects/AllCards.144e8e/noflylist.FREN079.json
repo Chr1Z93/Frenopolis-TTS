@@ -8,7 +8,7 @@
   },
   "Nickname": "no fly list",
   "GUID": "fren079",
-  "GMNotes": "{\"type\": \"meme\", \"subType\": \"\", \"stat\": \"2\", \"colorCost\": \"2\", \"colorlessCost\": \"0\", \"color\": \"red\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"meme\", \"color\": \"red\", \"deck\": \"RED\", \"stat\": 2, \"colorCost\": 2, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],

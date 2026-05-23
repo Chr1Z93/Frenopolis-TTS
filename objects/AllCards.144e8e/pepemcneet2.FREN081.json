@@ -8,7 +8,7 @@
   },
   "Nickname": "pepe mcneet2",
   "GUID": "fren081",
-  "GMNotes": "{\"type\": \"fren\", \"subType\": \"structure\", \"stat\": \"2\", \"colorCost\": \"0\", \"colorlessCost\": \"0\", \"color\": \"green\", \"deck\": \"RED\"}",
+  "GMNotes": "{\"type\": \"fren\", \"color\": \"green\", \"deck\": \"RED\", \"subType\": \"structure\", \"stat\": 2, \"colorCost\": 0, \"colorlessCost\": 0}",
   "Tags": [
     "PlayerCard"
   ],
