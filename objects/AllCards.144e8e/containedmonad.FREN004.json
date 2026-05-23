@@ -2,9 +2,9 @@
   "Name": "Card",
   "Transform": {
     "rotY": 180,
-    "scaleX": 1,
+    "scaleX": 0.95,
     "scaleY": 1,
-    "scaleZ": 1
+    "scaleZ": 0.95
   },
   "Nickname": "contained monad",
   "GUID": "fren004",
