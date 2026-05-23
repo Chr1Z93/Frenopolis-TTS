@@ -191,6 +191,7 @@ function xml_nextPhase(player)
       activePlayer = "Yellow"
     end
     broadcastToAll("It's " .. getColoredName(activePlayer) .. "'s turn!")
+    untapForActivePlayer()
   end
 
   highlightPhase()
@@ -208,7 +209,7 @@ function xml_spawnDecks()
 end
 
 function addObjectsToMap(map, searchPos)
-  local searchResult = SearchLib.atPosition(searchPos, "isCard")
+  local searchResult = SearchLib.atPosition(searchPos, "isCardOrDeck")
   for _, card in ipairs(searchResult) do
     map[card] = true
   end
@@ -224,24 +225,27 @@ function xml_nextPlayer()
   end
 
   broadcastToAll("It's " .. getColoredName(activePlayer) .. "'s turn!")
+  untapForActivePlayer()
 
   highlightPhase()
 end
 
 function getExcludedCards()
-  local excludedCards = {}
+  local map = {}
+
+  local PlayArea = getObjectByName("Play Area")
 
   for _, zoneName in ipairs({ "Narrative", "Void" }) do
-    addObjectsToMap(excludedCards, ZONES["Shared"][zoneName])
+    addObjectsToMap(map, PlayArea.positionToWorld(ZONES["Shared"][zoneName]))
   end
 
   for _, zoneName in ipairs({ "Archive", "Soul" }) do
     for _, playerColor in ipairs({ "Yellow", "Blue" }) do
-      addObjectsToMap(excludedCards, ZONES[playerColor][zoneName])
+      addObjectsToMap(map, PlayArea.positionToWorld(ZONES[playerColor][zoneName]))
     end
   end
 
-  return excludedCards
+  return map
 end
 
 function xml_untapAll()
@@ -249,7 +253,19 @@ function xml_untapAll()
 
   for _, obj in ipairs(getObjects()) do
     if obj.hasTag("PlayerCard") and not obj.is_face_down and not excludedCards[obj] then
-      obj.setRotationSmooth(obj.getRotation():setAt("y", (obj.getPosition().z > 0) and 0 or 180))
+      obj.setRotationSmooth(getDefaultRotation(obj))
+    end
+  end
+end
+
+function untapForActivePlayer()
+  local excludedCards = getExcludedCards()
+
+  for _, obj in ipairs(getObjects()) do
+    local pos           = obj.getPosition()
+    local onCorrectSide = (activePlayer == "Yellow" and pos.z < 0) or (activePlayer == "Blue" and pos.z > 0)
+    if onCorrectSide and obj.hasTag("PlayerCard") and not obj.is_face_down and not excludedCards[obj] then
+      obj.setRotationSmooth(getDefaultRotation(obj))
     end
   end
 end
@@ -497,7 +513,11 @@ function finalizeEnergyPayment()
 end
 
 function getDefaultRotation(card)
-  return card.getRotation():setAt("y", (card.getPosition().z > 0) and 0 or 180)
+  local y = (card.getPosition().z > 0) and 0 or 180
+  if math.abs(card.getPosition().x) > 5 and math.abs(card.getPosition().z) > 3 then
+    y = y + 180
+  end
+  return card.getRotation():setAt("y", y)
 end
 
 function getMetadata(card)
