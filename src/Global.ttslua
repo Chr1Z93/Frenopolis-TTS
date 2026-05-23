@@ -36,6 +36,10 @@ function onLoad(saveData)
     onObjectSpawn(obj)
   end
 
+  if not Player["Yellow"].seated and Player["White"].seated then
+    Player["White"].changeColor("Yellow")
+  end
+
   createGlobalXml()
 end
 
@@ -348,7 +352,6 @@ function processPlayPositionSelection()
   if not activeAction or not activeAction.targetPosition then return end
 
   if isInHand(activeAction.card) then
-    -- if card is in hand: highlight cards to pay mana
     startCostPayment()
   else
     activeAction = nil
@@ -396,11 +399,9 @@ function startCostPayment()
   local energyString  = formatEnergyString(colorCost, colorlessCost, targetColor)
   broadcastToColor("Select untapped cards to pay the cost! " .. energyString, activePlayer)
 
-  -- highlight all eligible cards
   local energyCards = getEnergyCards()
-
   for _, energyCard in ipairs(energyCards) do
-    -- check if the energy card is untapped (horizontal rotation check)
+    -- check if the energy card is untapped
     local currentYRot = energyCard.getRotation().y
     local isTapped    = math.abs(currentYRot - 90) < 15 or math.abs(currentYRot - 270) < 15
 
@@ -568,7 +569,7 @@ function contextFren(playerColor, _, card)
       selectedFrenTargets = {}
     }
 
-    broadcastToColor("Frenning initiated! Select " .. requiredCount .. " cards.", playerColor)
+    broadcastToColor("Frenning initiated! Select " .. requiredCount .. " " .. md.subType .. " cards.", playerColor)
     startFrenTargetSelection()
   else
     -- non-fren card: same as play, but only on top of another card with the same type-attribute
@@ -577,10 +578,14 @@ function contextFren(playerColor, _, card)
 end
 
 function getFrenIngredients()
-  local ingredients = {}
+  -- scan relevant zone
+  local subType     = activeAction.md.subType
+  local zoneName    = subType:sub(1, 1):upper() .. subType:sub(2)
+  local localPos    = ZONES[activePlayer][zoneName]
+  local searchPos   = getObjectByName("Play Area").positionToWorld(localPos)
 
-  -- TODO: scan relevant zone
-  for _, obj in ipairs(getObjects()) do
+  local ingredients = {}
+  for _, obj in ipairs(SearchLib.inArea(searchPos, nil, Vector(10, 1, 1), "isCard")) do
     if obj.type == "Card" then
       table.insert(ingredients, obj)
     end
@@ -595,9 +600,7 @@ function startFrenTargetSelection()
   local eligibleCards = getFrenIngredients()
 
   for i, obj in ipairs(eligibleCards) do
-    -- ensure we don't allow a player to pick the Fren card itself, or cards in hands
     if obj ~= activeAction.card and not isInHand(obj) then
-      -- Generate selection indicators offset horizontally next to the cards
       obj.createButton({
         click_function = "onClick_selectFrenIngredient_" .. i,
         function_owner = self,
@@ -610,7 +613,6 @@ function startFrenTargetSelection()
         tooltip        = "Absorb into Fren Stack"
       })
 
-      -- Bind input registration globally to this specific item instance
       _G["onClick_selectFrenIngredient_" .. i] = function(clickedObj, clickerColor)
         if clickerColor ~= activePlayer then return end
         processFrenSelectionClick(obj)
@@ -628,7 +630,6 @@ function processFrenSelectionClick(chosenCard)
   end
 
   chosenCard.clearButtons()
-  chosenCard.highlightOn("Orange")
   table.insert(activeAction.selectedFrenTargets, chosenCard)
 
   local currentCount = #activeAction.selectedFrenTargets
@@ -642,27 +643,24 @@ function processFrenSelectionClick(chosenCard)
 end
 
 function finalizeFrenStack()
-  if not activeAction or activeAction.type ~= "FrenCard" then return end
+  if not activeAction or activeAction.type ~= "Fren" then return end
 
-  local masterCard  = activeAction.card
-  local ingredients = activeAction.selectedFrenTargets
+  local masterCard      = activeAction.card
+  local ingredients     = activeAction.selectedFrenTargets
+  local basePos         = masterCard.getPosition()
+  local rot             = getDefaultRotation(masterCard)
+  local offsetDirection = (activePlayer == "Yellow") and 1 or -1
 
-  -- The base positions coordinates where the main composite framework structure rests
-  local basePos     = masterCard.getPosition()
-  local rot         = getDefaultRotation(masterCard)
-
-  -- Cascade and align ingredients cleanly below the primary entity card
   for i, ingredient in ipairs(ingredients) do
-    local offsetDirection = (activePlayer == "Yellow") and 1 or -1
-
-    -- Align and stack with structural 0.6 unit Z spacing variations
-    local targetPosition = basePos + Vector(0, 0.1, 0.6 * offsetDirection) * i
+    local targetPosition = basePos - Vector(0, 0.1, 0.6 * offsetDirection) * i
     ingredient.setPosition(targetPosition)
     ingredient.setRotation(rot)
     masterCard.addAttachment(ingredient)
   end
 
+  masterCard.setPosition(basePos + Vector(0, 0.1, 0.6 * offsetDirection) * #ingredients / 2)
   broadcastToColor("Fren completed!", activePlayer, "Green")
+  clearButtonsFromCards(getObjects())
   activeAction = nil
 end
 
@@ -771,10 +769,13 @@ end
 
 ZONES = {
   Yellow = {
-    Archive = Vector(-0.773, 0.11, 0.597),
-    Avatar  = Vector(-0.773, 0.11, 0.239),
-    Soul    = Vector(-0.773, 0.11, 0.848),
-    Energy  = {
+    Structure = Vector(0, 0.11, 0.16),
+    Entity    = Vector(0, 0.11, 0.48),
+    Meme      = Vector(0, 0.11, 0.80),
+    Archive   = Vector(-0.773, 0.11, 0.597),
+    Avatar    = Vector(-0.773, 0.11, 0.239),
+    Soul      = Vector(-0.773, 0.11, 0.848),
+    Energy    = {
       Vector(0.778, 0.11, 0.495),
       Vector(0.778, 0.11, 0.560),
       Vector(0.778, 0.11, 0.625),
@@ -784,10 +785,13 @@ ZONES = {
     }
   },
   Blue = {
-    Archive = Vector(0.773, 0.11, -0.597),
-    Avatar  = Vector(0.773, 0.11, -0.239),
-    Soul    = Vector(0.773, 0.11, -0.848),
-    Energy  = {
+    Structure = Vector(0, 0.11, -0.16),
+    Entity    = Vector(0, 0.11, -0.48),
+    Meme      = Vector(0, 0.11, -0.80),
+    Archive   = Vector(0.773, 0.11, -0.597),
+    Avatar    = Vector(0.773, 0.11, -0.239),
+    Soul      = Vector(0.773, 0.11, -0.848),
+    Energy    = {
       Vector(-0.778, 0.11, -0.495),
       Vector(-0.778, 0.11, -0.560),
       Vector(-0.778, 0.11, -0.625),

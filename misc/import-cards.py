@@ -37,7 +37,7 @@ class TTSCardGenerator:
                 # Create Card
                 card = {}
                 card["Name"] = "Card"
-                card["Transform"] = {"rotY": 180, "scaleX": 1, "scaleY": 1, "scaleZ": 1}
+                card["Transform"] = {"rotY": 180, "scaleX": 0.95, "scaleY": 1, "scaleZ": 0.95}
                 card["Nickname"] = card_name
                 card["GUID"] = f"fren{i:03}"
 
