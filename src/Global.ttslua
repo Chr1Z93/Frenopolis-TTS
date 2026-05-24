@@ -316,7 +316,19 @@ function contextPlay(playerColor, _, card, fren)
     -- limit to active players zones
     local onCorrectSide  = (activePlayer == "Yellow" and pos.z < 0) or (activePlayer == "Blue" and pos.z > 0)
     local inPlayAbleZone = pos.x < 5 and pos.x > -5
-    if inPlayAbleZone and onCorrectSide then
+
+    local localZ         = math.abs(snap.position.z)
+    local correctZone    = false
+
+    if md.type == "structure" and localZ <= 0.3 then
+      correctZone = true
+    elseif md.type == "entity" and localZ > 0.3 and localZ < 0.7 then
+      correctZone = true
+    elseif md.type == "meme" and localZ >= 0.7 then
+      correctZone = true
+    end
+
+    if inPlayAbleZone and onCorrectSide and correctZone then
       local searchResult = SearchLib.atPosition(pos, "isCard")
 
       -- when a non-fren card is "frenned", it needs to go on top of another card
@@ -332,11 +344,11 @@ function contextPlay(playerColor, _, card, fren)
         PlayArea.createButton({
           click_function = "processPlayPositionSelection" .. i,
           function_owner = self,
-          position       = snap.position:scale(Vector(-1, 1, 1)) + Vector(0, 0.1, 0),
+          position       = snap.position:scale(Vector(-1, 1, 1)) + Vector(0, 0.15, 0),
           width          = 400,
           height         = 400,
           scale          = Vector(0.1, 0.1, 0.1),
-          color          = { 0, 1, 0, 0.8 },
+          color          = { 0, 1, 0, 0.95 },
           tooltip        = "Play card here"
         })
 
@@ -344,9 +356,9 @@ function contextPlay(playerColor, _, card, fren)
           if clickerColor ~= activePlayer or not activeAction then return end
           if fren then
             if activePlayer == "Yellow" then
-              activeAction.targetPosition = pos + Vector(0, 0.1, 0.6) * #searchResult
+              activeAction.targetPosition = pos + Vector(0, 0.15, 0.6) * #searchResult
             else
-              activeAction.targetPosition = pos - Vector(0, 0.1, 0.6) * #searchResult
+              activeAction.targetPosition = pos - Vector(0, 0.15, 0.6) * #searchResult
             end
           else
             activeAction.targetPosition = pos
@@ -370,8 +382,8 @@ function processPlayPositionSelection()
   if isInHand(activeAction.card) then
     startCostPayment()
   else
+    activeAction.card.setPosition(activeAction.targetPosition)
     activeAction = nil
-    DeckLib.placeOrMergeIntoDeck(activeAction.card, activeAction.targetPosition, getDefaultRotation(activeAction.card))
   end
 end
 
@@ -552,7 +564,7 @@ function contextPlayAsEnergy(playerColor, _, card)
   local PlayArea = getObjectByName("Play Area")
   local pos      = PlayArea.positionToWorld(ZONES[playerColor]["Energy"][#energyCards + 1])
   card.setPosition(pos + Vector(0, 0.1 * #energyCards, 0))
-  card.setRotation(getDefaultRotation(card) + Vector(0, 180, 0))
+  card.setRotation(getDefaultRotation(card))
   broadcastToColor("Played '" .. card.getName() .. "' as energy.", playerColor)
 end
 
@@ -589,7 +601,7 @@ function contextFren(playerColor, _, card)
       selectedFrenTargets = {}
     }
 
-    broadcastToColor("Frenning initiated! Select " .. requiredCount .. " " .. md.subType .. " cards.", playerColor)
+    broadcastToColor("Frenning initiated! Select " .. requiredCount .. " cards.", playerColor)
     startFrenTargetSelection()
   else
     -- non-fren card: same as play, but only on top of another card with the same type-attribute
@@ -598,18 +610,26 @@ function contextFren(playerColor, _, card)
 end
 
 function getFrenIngredients()
-  -- scan relevant zone
-  local subType     = activeAction.md.subType
-  local zoneName    = subType:sub(1, 1):upper() .. subType:sub(2)
-  local localPos    = ZONES[activePlayer][zoneName]
-  local searchPos   = getObjectByName("Play Area").positionToWorld(localPos)
+  -- scan entire play area
+  local PlayArea    = getObjectByName("Play Area")
+  local searchPos   = PlayArea.positionToWorld(ZONES[activePlayer]["Entity"])
 
   local ingredients = {}
-  for _, obj in ipairs(SearchLib.inArea(searchPos, nil, Vector(10, 1, 1), "isCard")) do
+  for _, obj in ipairs(SearchLib.inArea(searchPos, nil, Vector(9, 1, 9), "isCard", true)) do
     if obj.type == "Card" then
       table.insert(ingredients, obj)
     end
   end
+
+  -- also search energies
+  local searchPos2   = PlayArea.positionToWorld(ZONES[activePlayer]["Energy"][3])
+
+  for _, obj in ipairs(SearchLib.inArea(searchPos2, nil, Vector(1, 1, 5), "isCard", true)) do
+    if obj.type == "Card" then
+      table.insert(ingredients, obj)
+    end
+  end
+
 
   return ingredients
 end
@@ -624,12 +644,12 @@ function startFrenTargetSelection()
       obj.createButton({
         click_function = "onClick_selectFrenIngredient_" .. i,
         function_owner = self,
-        position       = Vector(0, 0.5, 1),
+        position       = Vector(0, 1.5, 1.1),
         rotation       = Vector(0, 0, 0),
         width          = 600,
         height         = 600,
         scale          = Vector(0.5, 0.5, 0.5),
-        color          = { 1, 0.5, 0, 0.9 },
+        color          = { 1, 0.5, 0, 0.95 },
         tooltip        = "Absorb into Fren Stack"
       })
 
@@ -678,7 +698,7 @@ function finalizeFrenStack()
     masterCard.addAttachment(ingredient)
   end
 
-  masterCard.setPosition(basePos + Vector(0, 0.1, 0.6 * offsetDirection) * #ingredients / 2)
+  masterCard.setPosition(basePos + Vector(0, 0.15, 0.6 * offsetDirection) * #ingredients / 2)
   broadcastToColor("Fren completed!", activePlayer, "Green")
   clearButtonsFromCards(getObjects())
   activeAction = nil
