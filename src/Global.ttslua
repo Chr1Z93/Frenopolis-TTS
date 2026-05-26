@@ -700,14 +700,14 @@ function finalizeFrenStack()
       ingredient.setPosition(targetPosition)
     else
       regularCount = regularCount + 1
-      local targetPosition = basePos - Vector(0, 0.1, 0.6 * offsetDirection) * regularCount
+      local targetPosition = basePos + Vector(0, 0.1, -0.6 * offsetDirection) * regularCount
       ingredient.setPosition(targetPosition)
       ingredient.setRotation(rot)
       masterCard.addAttachment(ingredient)
     end
   end
 
-  masterCard.setPosition(basePos + Vector(0, 0.15, 0.6 * offsetDirection) * #ingredients / 2)
+  masterCard.setPosition(basePos + Vector(0, 0.15, 0) * #ingredients)
   broadcastToColor("Fren completed!", activePlayer, "Green")
   clearButtonsFromCards(getObjects())
   activeAction = nil
@@ -732,6 +732,18 @@ end
 --------------------------------------------------
 -- MARK: General Functions
 --------------------------------------------------
+
+-- stop cards from forming decks
+function tryObjectEnterContainer(container, object)
+  if container.type == "Card" and object.type == "Card" and isInMainPlayArea(container) and isInMainPlayArea(object) then
+    return false
+  end
+  return true
+end
+
+function isInMainPlayArea(card)
+  return math.abs(card.getPosition().x) < 5 and math.abs(card.getPosition().z) < 9
+end
 
 function moveToZone(card, owner, zoneName)
   local targetRotation
