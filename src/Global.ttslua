@@ -383,6 +383,7 @@ function processPlayPositionSelection()
     startCostPayment()
   else
     activeAction.card.setPosition(activeAction.targetPosition)
+    spawnStatDieForCard(activeAction.card)
     activeAction = nil
   end
 end
@@ -397,7 +398,7 @@ function xml_abortAction(player)
     -- revert tapping of selected cards
     if activeAction and activeAction.selectedEnergy then
       for _, card in ipairs(activeAction.selectedEnergy) do
-        card.setRotationSmooth(getDefaultRotation(card) + Vector(0, 180, 0))
+        card.setRotationSmooth(getDefaultRotation(card))
       end
     end
   elseif activeAction.type == "Fren" then
@@ -521,7 +522,30 @@ function finalizeEnergyPayment()
   if not activeAction then return end
   DeckLib.placeOrMergeIntoDeck(activeAction.card, activeAction.targetPosition, getDefaultRotation(activeAction.card))
   broadcastToColor("Card played successfully!", activePlayer, "Green")
+  spawnStatDieForCard(activeAction.card)
   activeAction = nil
+end
+
+function spawnStatDieForCard(card)
+  Wait.time(function()
+    Wait.condition(
+      function() actualDieSpawning(card) end,
+      function() return card == nil or card.resting end
+    )
+  end, 0.2)
+end
+
+function actualDieSpawning(card)
+  local md   = getMetadata(card)
+  local stat = md.stat or 0
+
+  if stat > 0 then
+    local die = spawnObject({
+      type     = "Die_12",
+      position = card.getPosition() + Vector(0, 0.6, 0)
+    })
+    die.setRotationValue(stat)
+  end
 end
 
 function getDefaultRotation(card)
