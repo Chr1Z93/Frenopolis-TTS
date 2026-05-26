@@ -526,7 +526,7 @@ end
 
 function getDefaultRotation(card)
   local y = (card.getPosition().z > 0) and 0 or 180
-  if math.abs(card.getPosition().x) > 5 and math.abs(card.getPosition().z) > 3 then
+  if isInEnergyZone(card) then
     y = y + 180
   end
   return card.getRotation():setAt("y", y)
@@ -622,7 +622,7 @@ function getFrenIngredients()
   end
 
   -- also search energies
-  local searchPos2   = PlayArea.positionToWorld(ZONES[activePlayer]["Energy"][3])
+  local searchPos2 = PlayArea.positionToWorld(ZONES[activePlayer]["Energy"][3])
 
   for _, obj in ipairs(SearchLib.inArea(searchPos2, nil, Vector(1, 1, 5), "isCard", true)) do
     if obj.type == "Card" then
@@ -690,18 +690,31 @@ function finalizeFrenStack()
   local basePos         = masterCard.getPosition()
   local rot             = getDefaultRotation(masterCard)
   local offsetDirection = (activePlayer == "Yellow") and 1 or -1
+  local regularCount    = 0
+  local energyCount     = 0
 
   for i, ingredient in ipairs(ingredients) do
-    local targetPosition = basePos - Vector(0, 0.1, 0.6 * offsetDirection) * i
-    ingredient.setPosition(targetPosition)
-    ingredient.setRotation(rot)
-    masterCard.addAttachment(ingredient)
+    if isInEnergyZone(ingredient) then
+      energyCount = energyCount + 1
+      local targetPosition = basePos + Vector(0, 0.1, 0.6 * offsetDirection) * energyCount
+      ingredient.setPosition(targetPosition)
+    else
+      regularCount = regularCount + 1
+      local targetPosition = basePos - Vector(0, 0.1, 0.6 * offsetDirection) * regularCount
+      ingredient.setPosition(targetPosition)
+      ingredient.setRotation(rot)
+      masterCard.addAttachment(ingredient)
+    end
   end
 
   masterCard.setPosition(basePos + Vector(0, 0.15, 0.6 * offsetDirection) * #ingredients / 2)
   broadcastToColor("Fren completed!", activePlayer, "Green")
   clearButtonsFromCards(getObjects())
   activeAction = nil
+end
+
+function isInEnergyZone(card)
+  return math.abs(card.getPosition().x) > 5 and math.abs(card.getPosition().z) > 3
 end
 
 function contextArchive(playerColor, _, card)
