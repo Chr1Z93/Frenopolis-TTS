@@ -232,7 +232,6 @@ end
 
 function getExcludedCards()
   local map = {}
-
   local PlayArea = getObjectByName("Play Area")
 
   for _, zoneName in ipairs({ "Narrative", "Void" }) do
@@ -242,6 +241,12 @@ function getExcludedCards()
   for _, zoneName in ipairs({ "Archive", "Soul" }) do
     for _, playerColor in ipairs({ "Yellow", "Blue" }) do
       addObjectsToMap(map, PlayArea.positionToWorld(ZONES[playerColor][zoneName]))
+    end
+  end
+
+  for _, playerColor in ipairs({ "Yellow", "Blue" }) do
+    for _, obj in ipairs(Player[playerColor].getHandObjects()) do
+      map[obj] = true
     end
   end
 
