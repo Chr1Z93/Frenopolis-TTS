@@ -722,11 +722,11 @@ function finalizeFrenStack()
   for i, ingredient in ipairs(ingredients) do
     if isInEnergyZone(ingredient) then
       energyCount = energyCount + 1
-      local targetPosition = basePos + Vector(0, 0.1, 0.6 * offsetDirection) * energyCount
+      local targetPosition = basePos + Vector(0, -0.1, 0.6 * offsetDirection) * energyCount
       ingredient.setPosition(targetPosition)
     else
       regularCount = regularCount + 1
-      local targetPosition = basePos + Vector(0, 0.1, -0.6 * offsetDirection) * regularCount
+      local targetPosition = basePos + Vector(0, -0.1, -0.6 * offsetDirection) * regularCount
       ingredient.setPosition(targetPosition)
       ingredient.setRotation(rot)
       masterCard.addAttachment(ingredient)
