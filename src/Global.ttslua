@@ -450,7 +450,7 @@ function startCostPayment()
         height         = 600,
         scale          = Vector(0.5, 0.5, 0.5),
         color          = { 0, 1, 0, 0.9 },
-        tooltip        = "Use Energy"
+        tooltip        = "Use Energy\n(" .. energyCard.getName() .. ")"
       })
 
       -- dynamically construct the global callback wrapper unique to this card
