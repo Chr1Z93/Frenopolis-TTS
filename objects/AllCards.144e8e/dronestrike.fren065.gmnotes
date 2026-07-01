@@ -1,0 +1,8 @@
+{
+  "type": "meme",
+  "color": "red",
+  "colorCost": 4,
+  "colorlessCost": 1,
+  "deck": "RED",
+  "stat": 7
+}

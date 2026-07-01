@@ -1,0 +1,8 @@
+{
+  "type": "structure",
+  "color": "violet",
+  "colorCost": 2,
+  "colorlessCost": 1,
+  "deck": "VIOLET",
+  "stat": 7
+}

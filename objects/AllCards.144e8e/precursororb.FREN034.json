@@ -1,27 +1,53 @@
 {
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "Autoraise": true,
+  "CardID": 3500,
+  "CustomDeck": {
+    "35": {
+      "BackIsHidden": true,
+      "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
+      "FaceURL": "frenopolis tts\\orange deck\\precursor orb.png",
+      "NumHeight": 1,
+      "NumWidth": 1,
+      "Type": 0,
+      "UniqueBack": false
+    }
+  },
+  "Description": "",
+  "DragSelectable": true,
+  "GMNotes_path": "AllCards.144e8e/precursororb.fren034.gmnotes",
+  "GUID": "fren034",
+  "Grid": true,
+  "GridProjection": false,
+  "IgnoreFoW": false,
+  "LayoutGroupSortIndex": 0,
+  "Locked": false,
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "MeasureMovement": false,
   "Name": "Card",
+  "Nickname": "precursor orb",
+  "Snap": true,
+  "Sticky": true,
+  "Tags": [
+    "PlayerCard"
+  ],
+  "Tooltip": true,
   "Transform": {
+    "posX": 0,
+    "posY": 0,
+    "posZ": 0,
+    "rotX": 0,
     "rotY": 180,
+    "rotZ": 0,
     "scaleX": 0.95,
     "scaleY": 1,
     "scaleZ": 0.95
   },
-  "Nickname": "precursor orb",
-  "GUID": "fren034",
-  "GMNotes": "{\"type\": \"structure\", \"color\": \"orange\", \"deck\": \"ORANGE\", \"stat\": 4, \"colorCost\": 1, \"colorlessCost\": 0}",
-  "Tags": [
-    "PlayerCard"
-  ],
-  "CardID": "3500",
-  "CustomDeck": {
-    "35": {
-      "FaceURL": "frenopolis tts\\orange deck\\precursor orb.png",
-      "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
-      "NumWidth": 1,
-      "NumHeight": 1,
-      "BackIsHidden": true,
-      "UniqueBack": false,
-      "Type": 0
-    }
-  }
+  "Value": 0,
+  "XmlUI": ""
 }

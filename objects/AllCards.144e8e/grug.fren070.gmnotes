@@ -1,0 +1,8 @@
+{
+  "type": "entity",
+  "color": "red",
+  "colorCost": 5,
+  "colorlessCost": 0,
+  "deck": "RED",
+  "stat": 6
+}

@@ -1,27 +1,53 @@
 {
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "Autoraise": true,
+  "CardID": 2400,
+  "CustomDeck": {
+    "24": {
+      "BackIsHidden": true,
+      "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
+      "FaceURL": "frenopolis tts\\orange deck\\katamari ball.png",
+      "NumHeight": 1,
+      "NumWidth": 1,
+      "Type": 0,
+      "UniqueBack": false
+    }
+  },
+  "Description": "",
+  "DragSelectable": true,
+  "GMNotes_path": "AllCards.144e8e/katamariball.fren023.gmnotes",
+  "GUID": "fren023",
+  "Grid": true,
+  "GridProjection": false,
+  "IgnoreFoW": false,
+  "LayoutGroupSortIndex": 0,
+  "Locked": false,
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "MeasureMovement": false,
   "Name": "Card",
+  "Nickname": "katamari ball",
+  "Snap": true,
+  "Sticky": true,
+  "Tags": [
+    "PlayerCard"
+  ],
+  "Tooltip": true,
   "Transform": {
+    "posX": 0,
+    "posY": 0,
+    "posZ": 0,
+    "rotX": 0,
     "rotY": 180,
+    "rotZ": 0,
     "scaleX": 0.95,
     "scaleY": 1,
     "scaleZ": 0.95
   },
-  "Nickname": "katamari ball",
-  "GUID": "fren023",
-  "GMNotes": "{\"type\": \"structure\", \"color\": \"black\", \"deck\": \"ORANGE\", \"stat\": 4, \"colorCost\": 4, \"colorlessCost\": 0}",
-  "Tags": [
-    "PlayerCard"
-  ],
-  "CardID": "2400",
-  "CustomDeck": {
-    "24": {
-      "FaceURL": "frenopolis tts\\orange deck\\katamari ball.png",
-      "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
-      "NumWidth": 1,
-      "NumHeight": 1,
-      "BackIsHidden": true,
-      "UniqueBack": false,
-      "Type": 0
-    }
-  }
+  "Value": 0,
+  "XmlUI": ""
 }

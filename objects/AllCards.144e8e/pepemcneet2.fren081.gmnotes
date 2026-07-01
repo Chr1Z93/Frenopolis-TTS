@@ -1,0 +1,9 @@
+{
+  "type": "fren",
+  "color": "green",
+  "colorCost": 0,
+  "colorlessCost": 0,
+  "deck": "RED",
+  "stat": 2,
+  "subType": "structure"
+}

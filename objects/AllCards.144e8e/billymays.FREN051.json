@@ -1,27 +1,53 @@
 {
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "Autoraise": true,
+  "CardID": 5200,
+  "CustomDeck": {
+    "52": {
+      "BackIsHidden": true,
+      "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
+      "FaceURL": "frenopolis tts\\red deck\\billy mays.png",
+      "NumHeight": 1,
+      "NumWidth": 1,
+      "Type": 0,
+      "UniqueBack": false
+    }
+  },
+  "Description": "",
+  "DragSelectable": true,
+  "GMNotes_path": "AllCards.144e8e/billymays.fren051.gmnotes",
+  "GUID": "fren051",
+  "Grid": true,
+  "GridProjection": false,
+  "IgnoreFoW": false,
+  "LayoutGroupSortIndex": 0,
+  "Locked": false,
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "MeasureMovement": false,
   "Name": "Card",
+  "Nickname": "billy mays",
+  "Snap": true,
+  "Sticky": true,
+  "Tags": [
+    "PlayerCard"
+  ],
+  "Tooltip": true,
   "Transform": {
+    "posX": 0,
+    "posY": 0,
+    "posZ": 0,
+    "rotX": 0,
     "rotY": 180,
+    "rotZ": 0,
     "scaleX": 0.95,
     "scaleY": 1,
     "scaleZ": 0.95
   },
-  "Nickname": "billy mays",
-  "GUID": "fren051",
-  "GMNotes": "{\"type\": \"entity\", \"color\": \"red\", \"deck\": \"RED\", \"stat\": 6, \"colorCost\": 3, \"colorlessCost\": 1}",
-  "Tags": [
-    "PlayerCard"
-  ],
-  "CardID": "5200",
-  "CustomDeck": {
-    "52": {
-      "FaceURL": "frenopolis tts\\red deck\\billy mays.png",
-      "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/9621278958948081727/F5E1D3F37F160C70F8D55986CDE569A329C17191/",
-      "NumWidth": 1,
-      "NumHeight": 1,
-      "BackIsHidden": true,
-      "UniqueBack": false,
-      "Type": 0
-    }
-  }
+  "Value": 0,
+  "XmlUI": ""
 }
