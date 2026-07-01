@@ -501,7 +501,7 @@ function getRemainingCost()
 
   -- if the player paid excess matching colors, they spill over into the colorless requirement
   if remainingColorCost < 0 then
-    paidColorlessCount = paidColorlessCount + math.abs(remainingColorCost)
+    paidColorlessCount = paidColorlessCount - remainingColorCost
     remainingColorCost = 0
   end
 
@@ -639,12 +639,12 @@ function contextFren(playerColor, _, card)
 end
 
 function getFrenIngredients()
-  -- scan entire play area
-  local PlayArea    = getObjectByName("Play Area")
-  local searchPos   = PlayArea.positionToWorld(ZONES[activePlayer]["Entity"])
-
   local ingredients = {}
-  for _, obj in ipairs(SearchLib.inArea(searchPos, nil, Vector(9, 1, 9), "isCard", true)) do
+  local PlayArea    = getObjectByName("Play Area")
+
+  -- scan play area
+  local searchPos   = PlayArea.positionToWorld(ZONES[activePlayer]["Entity"])
+  for _, obj in ipairs(SearchLib.inArea(searchPos, nil, Vector(9, 1, 9), "isCard")) do
     if obj.type == "Card" then
       table.insert(ingredients, obj)
     end
@@ -652,13 +652,11 @@ function getFrenIngredients()
 
   -- also search energies
   local searchPos2 = PlayArea.positionToWorld(ZONES[activePlayer]["Energy"][3])
-
-  for _, obj in ipairs(SearchLib.inArea(searchPos2, nil, Vector(1, 1, 5), "isCard", true)) do
+  for _, obj in ipairs(SearchLib.inArea(searchPos2, nil, Vector(1, 1, 5), "isCard")) do
     if obj.type == "Card" then
       table.insert(ingredients, obj)
     end
   end
-
 
   return ingredients
 end
@@ -667,7 +665,6 @@ function startFrenTargetSelection()
   if not activeAction or activeAction.type ~= "Fren" then return end
 
   local eligibleCards = getFrenIngredients()
-
   for i, obj in ipairs(eligibleCards) do
     if obj ~= activeAction.card and not isInHand(obj) then
       obj.createButton({
