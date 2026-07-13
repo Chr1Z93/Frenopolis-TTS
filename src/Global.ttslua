@@ -478,10 +478,43 @@ end
 function getRemainingCost()
   if not activeAction or not activeAction.card or not activeAction.selectedEnergy or not activeAction.md then return end
 
-  local targetColor        = activeAction.md.color or "none"
-  local colorCost          = activeAction.md.colorCost or 0
-  local colorlessCost      = activeAction.md.colorlessCost or 0
-  local paidColorCount     = 0
+  local targetColor   = activeAction.md.color or "none"
+  local colorCost     = activeAction.md.colorCost or 0
+  local colorlessCost = activeAction.md.colorlessCost or 0
+
+  -- SPECIAL RULE FOR BLACK COSTS
+  if targetColor == "black" then
+    local counts    = {}
+    local totalPaid = 0
+
+    for _, energyCard in ipairs(activeAction.selectedEnergy) do
+      local energyMd    = getMetadata(energyCard)
+      local energyColor = energyMd.color or "none"
+
+      totalPaid         = totalPaid + 1
+
+      -- black energy cannot satisfy black costs
+      if energyColor ~= "black" then
+        counts[energyColor] = (counts[energyColor] or 0) + 1
+      end
+    end
+
+    local largestGroup = 0
+
+    for _, count in pairs(counts) do
+      largestGroup = math.max(largestGroup, count)
+    end
+
+    local remainingColorCost = math.max(0, colorCost - largestGroup)
+
+    -- only energy beyond the color requirement can pay colorless
+    local excessEnergy = math.max(0, totalPaid - colorCost)
+    local remainingColorlessCost = math.max(0, colorlessCost - excessEnergy)
+    return remainingColorCost, remainingColorlessCost
+  end
+
+  -- NORMAL COLORS
+  local paidColorCount = 0
   local paidColorlessCount = 0
 
   for _, energyCard in ipairs(activeAction.selectedEnergy) do
