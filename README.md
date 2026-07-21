@@ -32,7 +32,13 @@ The current implementation provides a number of core features:
 
 ## How to use
 
+This project is contains decomposed data and it includes a VS Code task (see `/.vscode`) for rebuilding a complete savegame for Tabletop Simulator.
 
+In practice, that means:
+
+1. Open the repository in VS Code.
+2. Use the provided build task to assemble the mod data into a complete savegame package from the decomposed source files.
+3. Load the resulting savegame in Tabletop Simulator and start playing.
 
 ## Notes
 
